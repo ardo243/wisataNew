@@ -2,10 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#A6DDE5"
-    tools:context=".MainActivity">
+    tools:context=".ActivityHome"
+    >
+
 
     <ImageView
         android:id="@+id/profile_image"
@@ -55,7 +58,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@android:drawable/ic_search_category"
+                android:src="@android:drawable/alert_dark_frame"
                 app:tint="@android:color/darker_gray"
                 tools:ignore="ContentDescription" />
 
@@ -94,6 +97,7 @@
             tools:ignore="UseCompoundDrawables">
 
             <LinearLayout
+                android:id="@+id/menu_Distinasi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -103,7 +107,7 @@
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/jogja"
+                    android:src="@drawable/icon_destinasi"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -122,9 +126,9 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="48dp"
+                    android:layout_width="40dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/jogja"
+                    android:src="@drawable/kuliner"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -145,7 +149,7 @@
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/jogja"
+                    android:src="@drawable/icon_destinasi"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -174,25 +178,28 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/main_destination_card"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_destinations_title">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/destination_image"
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:scaleType="centerCrop"
                 android:src="@drawable/jogja"
                 tools:ignore="ContentDescription" />
@@ -216,18 +223,46 @@
                 android:text="alamat wisata"
                 android:textSize="14sp" />
 
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+    <LinearLayout
+        android:id="@+id/bottomNav"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/white"
+        android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/accont"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:src="@drawable/home"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:src="@drawable/accont"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:padding="1sp"
+            android:src="@drawable/setting"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,13 +3,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_bg"
+    android:background="@android:color/holo_blue_light"
     >
 
     <RelativeLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:backgroundTint="@color/text_secondary"
         android:paddingTop="280dp"
         android:padding="16dp"
         android:background="@drawable/bg_header">
@@ -103,6 +104,7 @@
 
             <!-- Ibarbo Park -->
             <LinearLayout
+                android:id="@+id/cardIbarbo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -142,6 +144,7 @@
 
             <!-- HEHA SKY VIEW -->
             <LinearLayout
+                android:id="@+id/cardheha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -154,8 +157,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/heha"
-                    />
+                    android:src="@drawable/heha" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -179,11 +181,16 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/poppins_regular"/>
 
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:padding="8dp" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <!-- BOTTOM NAV -->
     <LinearLayout
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
@@ -191,28 +198,31 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="@color/nav_bg"
+        android:background="@color/white"
         android:weightSum="3">
 
         <ImageView
+            android:id="@+id/accont"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:padding="8dp"
+            android:padding="2dp"
+            android:src="@drawable/home"
             />
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:padding="8dp"
+            android:padding="2dp"
+            android:src="@drawable/accont"
             />
-
         <ImageView
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:padding="8dp"
+            android:padding="1sp"
+            android:src="@drawable/setting"
             />
     </LinearLayout>
 
