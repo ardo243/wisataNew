@@ -5,4 +5,7 @@
     <color name="red">#FF0000</color>
     <color name="app_background">#E6F4F4</color> <color name="text_primary">#000000</color>
     <color name="text_secondary">#757575</color>
+    <color name="main_background_blue">#42C5F5</color>
+    <color name="text_blue">#42C5F5</color>
+    <color name="biru">#44C2F4</color>
 </resources>
