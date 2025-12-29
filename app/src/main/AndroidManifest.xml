@@ -24,6 +24,15 @@
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".PaketWisataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AturJadwalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PembayaranActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

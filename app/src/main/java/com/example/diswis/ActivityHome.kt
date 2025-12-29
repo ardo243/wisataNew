@@ -1,14 +1,12 @@
 package com.example.diswis
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import android.widget.LinearLayout
-import android.content.Intent
 
 class ActivityHome : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,29 +20,27 @@ class ActivityHome : AppCompatActivity() {
             insets
         }
 
-        // Setup RecyclerView
-        val rvDestinations = findViewById<RecyclerView>(R.id.rv_destinations)
-        rvDestinations.layoutManager = LinearLayoutManager(this)
-        rvDestinations.isNestedScrollingEnabled = false
-        val destinations = listOf(
-            Destination("Candi Prambanan", "Rp 50.000", R.drawable.candi_prambanan),
-            Destination("Candi Prambanan", "Rp 50.000", R.drawable.candi_prambanan),
-            Destination("Tempat Lain", "Rp 75.000", R.drawable.jogja)
-        )
-        val adapter = DestinationAdapter(destinations)
-        rvDestinations.adapter = adapter
+        // Fragment is loaded via FragmentContainerView in XML, no manual transaction needed here
+        // unless you want to replace it dynamically later.
 
-        // Setup Category Click (Placeholder)
-        val menuDestinasi = findViewById<LinearLayout>(R.id.menu_Distinasi)
-        menuDestinasi.setOnClickListener {
-            // TODO: Navigate to Destinasi Page
-            // val intent = Intent(this, DestinationActivity::class.java)
+        // Setup Categories
+        findViewById<LinearLayout>(R.id.btn_destinasi).setOnClickListener {
+             // val intent = Intent(this, DestinationActivity::class.java)
+             // startActivity(intent)
+        }
+
+        findViewById<LinearLayout>(R.id.btn_paket_wisata).setOnClickListener {
+            val intent = Intent(this, PaketWisataActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<LinearLayout>(R.id.btn_kuliner).setOnClickListener {
+            // val intent = Intent(this, KulinerActivity::class.java)
             // startActivity(intent)
         }
 
-        // Navigation to Profile
-        val profileImage = findViewById<android.widget.ImageView>(R.id.profile_image)
-        profileImage.setOnClickListener {
+        // Navigation
+        findViewById<android.view.View>(R.id.profile_image).setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }

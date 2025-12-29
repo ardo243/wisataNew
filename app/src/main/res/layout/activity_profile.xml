@@ -16,7 +16,6 @@
         app:tint="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cvProfileImage"
         android:layout_width="100dp"
