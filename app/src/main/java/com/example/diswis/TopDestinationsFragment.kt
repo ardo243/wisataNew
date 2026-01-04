@@ -15,13 +15,13 @@ class TopDestinationsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_top_destinations, container, false)
+        return inflater.inflate(R.layout.item_destination_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val rvDestinations = view.findViewById<RecyclerView>(R.id.rv_destinations)
+        val rvDestinations = view.findViewById<RecyclerView>(R.id.rv_paket_wisata)
         rvDestinations.layoutManager = LinearLayoutManager(context)
         rvDestinations.isNestedScrollingEnabled = false // Important for nested scrolling in ActivityHome
 
