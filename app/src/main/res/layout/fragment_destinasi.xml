@@ -6,35 +6,32 @@
     android:background="@android:color/holo_blue_light"
     >
 
+    <!-- Destinasi Lainnya -->
     <RelativeLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:backgroundTint="@color/text_secondary"
-        android:paddingTop="280dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
         android:padding="16dp"
-        android:background="@drawable/bg_header">
+        android:paddingTop="280dp">
 
         <ImageView
             android:id="@+id/btnBack"
             android:layout_width="0dp"
-            android:layout_height="30dp"
-            />
+            android:layout_height="30dp" />
 
         <TextView
             android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Destinasi"
-
-            android:textStyle="bold"
             android:fontFamily="@font/poppins_bold"
-
+            android:text="Destinasi"
+            android:textColor="@color/black"
             android:textSize="20sp" />
     </RelativeLayout>
 
-    <!-- Destinasi Lainnya -->
     <TextView
         android:id="@+id/txtLabel"
         android:layout_width="wrap_content"
@@ -43,7 +40,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="19dp"
         android:text="Destinasi Lainnya"
-        android:textStyle="bold"
         android:fontFamily="@font/poppins_bold"
         android:textSize="14sp"/>
 
@@ -199,7 +195,7 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:background="@color/white"
-        android:weightSum="3">
+        android:weightSum="4">
 
         <ImageView
             android:id="@+id/accont"
@@ -217,6 +213,13 @@
             android:padding="2dp"
             android:src="@drawable/person"
             />
+        <ImageView
+            android:id="@+id/nav_fav"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:src="@drawable/love" />
+
         <ImageView
             android:layout_width="0dp"
             android:layout_height="40dp"

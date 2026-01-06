@@ -5,12 +5,22 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.diswis.utils.SessionManager
+import android.content.Intent
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        val sessionManager = SessionManager(this)
+        if (sessionManager.isLoggedIn()) {
+            val intent = Intent(this, ActivityHome::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         val btnMasuk = findViewById<android.widget.Button>(R.id.btnMasuk)
         val btnDaftar = findViewById<android.widget.Button>(R.id.btnDaftar)
         btnMasuk.setOnClickListener {

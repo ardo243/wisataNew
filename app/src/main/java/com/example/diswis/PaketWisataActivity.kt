@@ -72,9 +72,6 @@ class PaketWisataActivity : AppCompatActivity() {
             startActivity(intent)
         }
         
-        findViewById<ImageView>(R.id.nav_user).setOnClickListener {
-             val intent = Intent(this, ProfileActivity::class.java)
-             startActivity(intent)
-        }
+
     }
 }

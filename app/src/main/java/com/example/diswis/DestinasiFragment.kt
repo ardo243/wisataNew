@@ -1,4 +1,4 @@
-package com.example.destinasi
+package com.example.diswis
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -15,7 +15,7 @@ class TopDestinationsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.item_destination_home, container, false)
+        return inflater.inflate(R.layout.fragment_top_destinations, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
