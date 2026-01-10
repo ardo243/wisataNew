@@ -8,12 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class DestinationAdapter(private val destinations: List<Destination>) :
+class DestinationAdapter(private val destinations: ArrayList<Destination>) :
     RecyclerView.Adapter<DestinationAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imgDestination: ImageView = view.findViewById(R.id.img_destination)
         val tvTitle: TextView = view.findViewById(R.id.tv_title)
+        val tvLocation: TextView = view.findViewById(R.id.tv_location)
         val tvPrice: TextView = view.findViewById(R.id.tv_price)
         val btnDetail: Button = view.findViewById(R.id.btn_detail)
     }
@@ -27,6 +28,7 @@ class DestinationAdapter(private val destinations: List<Destination>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = destinations[position]
         holder.tvTitle.text = item.title
+        holder.tvLocation.text = item.location
         holder.tvPrice.text = item.price
         holder.imgDestination.setImageResource(item.imageResId)
 
@@ -36,4 +38,10 @@ class DestinationAdapter(private val destinations: List<Destination>) :
     }
 
     override fun getItemCount() = destinations.size
+
+    fun updateData(newDestinations: List<Destination>) {
+        (destinations as ArrayList).clear()
+        destinations.addAll(newDestinations)
+        notifyDataSetChanged()
+    }
 }

@@ -1,25 +1,414 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_light"
-    >
+    android:background="@android:color/white">
 
-    <!-- Destinasi Lainnya -->
-    <RelativeLayout
-        android:id="@+id/headerLayout"
+    <!-- HERO IMAGE (Fixed at top) -->
+    <ImageView
+        android:id="@+id/ivHero"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/white"
-        android:backgroundTint="@color/white"
-        android:padding="16dp"
-        android:paddingTop="280dp">
+        android:layout_height="320dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/candi_prambanan" />
+
+    <!-- Gradient Overlay for text visibility -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="#40000000" />
+
+    <!-- SCROLLABLE CONTENT -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNav"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="85dp"
+            android:orientation="vertical">
+
+            <!-- Spacer for Header padding -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <!-- SEARCH BAR -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/search_card_destinasi"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="#80000000"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_search"
+                        app:tint="@android:color/white" />
+
+                    <EditText
+                        android:id="@+id/et_search_destinasi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:background="@android:color/transparent"
+                        android:hint="Cari destinasi wisata..."
+                        android:textColor="@android:color/white"
+                        android:textColorHint="#DDDDDD"
+                        android:textSize="14sp"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:imeOptions="actionSearch" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_white_top_rounded"
+                android:orientation="vertical"
+                android:backgroundTint="@color/biru"
+                android:paddingTop="24dp"
+                android:paddingHorizontal="20dp"
+                android:paddingBottom="40dp">
+
+                <!-- SECTION HEADER -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/txtLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Pilihan Terbaik"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Card Candi Prambanan -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardPrambanan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="@color/white">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="180dp">
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/candi_prambanan" />
+                                <ImageView
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:src="@drawable/love"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_margin="12dp"
+                                    app:tint="@android:color/white"/>
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Candi Prambanan"
+                                    android:fontFamily="@font/poppins_bold"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/black"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center_vertical">
+                                    <ImageView
+                                        android:layout_width="14dp"
+                                        android:layout_height="14dp"
+                                        android:src="@drawable/location"
+                                        app:tint="#2196F3"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="4dp"
+                                        android:text="Sleman, DI Yogyakarta"
+                                        android:textSize="12sp"
+                                        android:textColor="#757575"
+                                        android:fontFamily="@font/poppins_regular"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="12dp"
+                                    android:gravity="center_vertical">
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="Harga Tiket Mulai"
+                                        android:textSize="10sp"
+                                        android:textColor="#9E9E9E"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Rp50.000"
+                                        android:textColor="#2196F3"
+                                        android:textSize="16sp"
+                                        android:fontFamily="@font/poppins_bold"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Card Ibarbo -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardIbarbo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="@color/white">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="180dp">
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/ibarbo" />
+                                <ImageView
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:src="@drawable/love"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_margin="12dp"
+                                    app:tint="@android:color/white"/>
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Museum Jogja Kembali"
+                                    android:fontFamily="@font/poppins_bold"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/black"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center_vertical">
+                                    <ImageView
+                                        android:layout_width="14dp"
+                                        android:layout_height="14dp"
+                                        android:src="@drawable/location"
+                                        app:tint="#2196F3"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="4dp"
+                                        android:text="Ngaglik, Sleman"
+                                        android:textSize="12sp"
+                                        android:textColor="#757575"
+                                        android:fontFamily="@font/poppins_regular"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="12dp"
+                                    android:gravity="center_vertical">
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="Harga Tiket Mulai"
+                                        android:textSize="10sp"
+                                        android:textColor="#9E9E9E"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Rp15.000"
+                                        android:textColor="#2196F3"
+                                        android:textSize="16sp"
+                                        android:fontFamily="@font/poppins_bold"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Card Heha -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardheha"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="@color/white">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="180dp">
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/heha" />
+                                <ImageView
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:src="@drawable/love"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_margin="12dp"
+                                    app:tint="@android:color/white"/>
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Heha Sky View"
+                                    android:fontFamily="@font/poppins_bold"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/black"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center_vertical">
+                                    <ImageView
+                                        android:layout_width="14dp"
+                                        android:layout_height="14dp"
+                                        android:src="@drawable/location"
+                                        app:tint="#2196F3"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="4dp"
+                                        android:text="Dlingo - Patuk, GK"
+                                        android:textSize="12sp"
+                                        android:textColor="#757575"
+                                        android:fontFamily="@font/poppins_regular"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="12dp"
+                                    android:gravity="center_vertical">
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="Harga Tiket Mulai"
+                                        android:textSize="10sp"
+                                        android:textColor="#9E9E9E"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Rp30.000"
+                                        android:textColor="#2196F3"
+                                        android:textSize="16sp"
+                                        android:fontFamily="@font/poppins_bold"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- FIXED TOP HEADER -->
+    <RelativeLayout
+        android:id="@+id/headerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingHorizontal="16dp"
+        android:layout_alignParentTop="true">
 
         <ImageView
             android:id="@+id/btnBack"
-            android:layout_width="0dp"
-            android:layout_height="30dp" />
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@android:color/white" />
 
         <TextView
             android:id="@+id/txtTitle"
@@ -27,206 +416,55 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/poppins_bold"
-            android:text="Destinasi"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:text="Destinasi Populer"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/txtLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/headerLayout"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="19dp"
-        android:text="Destinasi Lainnya"
-        android:fontFamily="@font/poppins_bold"
-        android:textSize="14sp"/>
-
-    <!-- SCROLL -->
-    <ScrollView
-        android:fillViewport="true"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/txtLabel"
-        android:layout_above="@+id/bottomNav"
-        android:padding="16dp"
-        android:layout_marginTop="8dp">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!-- Candi Prambanan -->
-            <LinearLayout
-                android:id="@+id/cardPrambanan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/bg_card"
-                android:padding="12dp"
-                android:layout_marginBottom="16dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/candi_prambanan"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CANDI PRAMBANAN"
-                    android:textSize="14sp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/poppins_bold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Jl Raya Solo - Yogya"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/poppins_semibold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rp 50.000"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/poppins_regular"/>
-            </LinearLayout>
-
-
-            <!-- Ibarbo Park -->
-            <LinearLayout
-                android:id="@+id/cardIbarbo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/bg_card"
-                android:padding="12dp"
-                android:fontFamily="@font/poppins_bold"
-                android:layout_marginBottom="16dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ibarbo"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="IBARBO PARK"
-                    android:textSize="14sp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/poppins_bold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Jl Magelang No 14"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/poppins_semibold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rp 35.000"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/poppins_regular"/>
-            </LinearLayout>
-
-            <!-- HEHA SKY VIEW -->
-            <LinearLayout
-                android:id="@+id/cardheha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/bg_card"
-                android:padding="12dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/poppins_bold">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/heha" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="HEHA SKY VIEW"
-                    android:textSize="14sp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/poppins_bold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Jl Dlingo-Patuk No 2"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/poppins_semibold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rp 30.000"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/poppins_regular"/>
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:padding="8dp" />
-
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
+    <!-- BOTTOM NAVIGATION -->
     <LinearLayout
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
         android:gravity="center"
-        android:background="@color/white"
+        android:orientation="horizontal"
         android:weightSum="4">
 
         <ImageView
-            android:id="@+id/accont"
+            android:id="@+id/nav_home"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="24dp"
             android:layout_weight="1"
-            android:padding="2dp"
             android:src="@drawable/home"
-            />
+            app:tint="@android:color/black"/>
 
         <ImageView
+            android:id="@+id/nav_user"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="24dp"
             android:layout_weight="1"
-            android:padding="2dp"
-            android:src="@drawable/person"
-            />
+            android:src="@drawable/ticket"
+            app:tint="@android:color/black"/>
+
         <ImageView
             android:id="@+id/nav_fav"
             android:layout_width="0dp"
-            android:layout_height="32dp"
+            android:layout_height="24dp"
             android:layout_weight="1"
-            android:src="@drawable/love" />
+            android:src="@drawable/love"
+            app:tint="@android:color/black"/>
 
         <ImageView
+            android:id="@+id/nav_settings"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="24dp"
             android:layout_weight="1"
-            android:padding="1sp"
-            android:src="@drawable/settings"
-            />
+            android:src="@drawable/person"
+            app:tint="@android:color/black"/>
     </LinearLayout>
 
 </RelativeLayout>

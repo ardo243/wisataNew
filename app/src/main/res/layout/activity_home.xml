@@ -5,7 +5,7 @@
     android:id="@+id/main_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4FC3F7"
+    android:background="#F0F4F8"
     tools:context=".ActivityHome">
 
     <!-- Scrollable Content -->
@@ -18,262 +18,347 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="16dp">
+            android:layout_height="wrap_content">
 
-            <View
-                android:id="@+id/header_bg"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="@drawable/bg_white_header_rounded"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="24dp" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/profile_card"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="32dp"
-                app:cardCornerRadius="30dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-                
-                <ImageView
-                    android:id="@+id/profile_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/person" />
-            </androidx.cardview.widget.CardView>
-
-            <!-- Greeting Text -->
-            <TextView
-                android:id="@+id/tv_greeting_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="Hallo !!"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:fontFamily="@font/poppins_bold"
-                app:layout_constraintStart_toEndOf="@+id/profile_card"
-                app:layout_constraintTop_toTopOf="@+id/profile_card"
-                android:layout_marginTop="8dp"/>
-
-            <TextView
-                android:id="@+id/tv_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Selamat Datang"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/tv_greeting_label"
-                app:layout_constraintTop_toBottomOf="@+id/tv_greeting_label" />
-
-            <!-- Notification Icon -->
+            <!-- HERO IMAGE (Behind content) -->
             <ImageView
-                android:id="@+id/ic_notification"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginEnd="24dp"
-                android:src="@android:drawable/ic_popup_reminder"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_card"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/profile_card"
-                app:tint="@android:color/black" />
+                android:id="@+id/hero_image"
+                android:layout_width="match_parent"
+                android:layout_height="480dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/candi_prambanan" 
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/candi_prambanan" />
+             <!-- Note: src should be Puncak Segoro if available, I'll use candi_prambanan as placeholder or check if user uploaded one. 
+                  Prompt says "Puncak Segoro", I don't have that file name in my list, I recall seeing 'heha.jpg' or similar. 
+                  I'll use 'candi_prambanan' for now, user can change. Or wait, 'heha.jpg' might be better. -->
 
-            <!-- Search Bar -->
+            <!-- Dark Gradient / Overlay -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="480dp"
+                android:background="#33000000"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-            <!-- Categories Container using ConstraintLayout for spacing -->
+            <!-- HEADER CONTENT (Absolute positioning on top) -->
+             <LinearLayout
+                android:id="@+id/header_top_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:paddingTop="52dp"
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/search_card"
-                android:layout_width="0dp"
-                android:background="@color/white"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hallo,"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_regular" />
+
+                    <TextView
+                        android:id="@+id/tv_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nama pengguna"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/poppins_bold" />
+                </LinearLayout>
+
+                 <ImageView
+                    android:id="@+id/ic_notification"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="8dp"
+                    android:background="@drawable/bg_white_rounded_square"
+                    android:backgroundTint="#33FFFFFF"
+                    android:src="@drawable/ticket"
+                    app:tint="@color/white" />
+            </LinearLayout>
+
+             <!-- SEARCH BAR -->
+            <LinearLayout
+                android:id="@+id/search_container"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
-                android:layout_marginTop="180dp"
-                app:cardCornerRadius="25dp"
-                app:cardElevation="4dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@android:drawable/ic_menu_search"
-                        app:tint="#757575" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:text="Search"
-                        android:textColor="#BDBDBD"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/categories_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_white_rounded_square"
+                android:backgroundTint="#40FFFFFF"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/search_card">
+                app:layout_constraintTop_toBottomOf="@+id/header_top_bar">
 
-                <!-- Destinasi -->
-                <LinearLayout
-                    android:id="@+id/btn_destinasi"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_paket_wisata"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintTop_toTopOf="parent">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@android:drawable/ic_menu_search"
+                    app:tint="@color/white" />
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="6dp">
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:background="@android:color/transparent"
+                    android:hint="Search wisata..."
+                    android:textColorHint="#E0E0E0"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:maxLines="1"
+                    android:inputType="text" />
+            </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="20dp"
-                            android:background="@color/white"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/icon_destinasi" />
-                    </androidx.cardview.widget.CardView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Destinasi"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <!-- Paket Wisata -->
-                <LinearLayout
-                    android:id="@+id/btn_paket_wisata"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintStart_toEndOf="@+id/btn_destinasi"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_kuliner"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintTop_toTopOf="parent">
-                    
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="6dp">
-
-                         <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="20dp"
-                             android:background="@color/white"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/icon_destinasi"
-                            app:tint="#000000"/>
-                    </androidx.cardview.widget.CardView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Paket Wisata"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <!-- Kuliner -->
-                <LinearLayout
-                    android:id="@+id/btn_kuliner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintStart_toEndOf="@+id/btn_paket_wisata"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintTop_toTopOf="parent">
-                    
-                     <androidx.cardview.widget.CardView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="6dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="20dp"
-                            android:background="@color/white"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/kuliner" />
-                    </androidx.cardview.widget.CardView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Kuliner"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/tv_top_destinations"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="32dp"
-                android:text="Top Destinations"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/categories_layout" />
-
-            <!-- Fragment Container -->
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragment_container"
-                android:name="com.example.diswis.TopDestinationsFragment"
+            <!-- HERO TEXT & INDICATORS -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_top_destinations" />
+                android:orientation="vertical"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:layout_marginBottom="50dp"
+                app:layout_constraintBottom_toTopOf="@+id/content_sheet">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Puncak Segoro"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rasakan sensasi liburan eksotis di atas\ntebing laut Yogyakarta"
+                    android:textColor="#F0F0F0"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_marginTop="4dp"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"/>
+
+                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="16dp">
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="4dp"
+                        android:background="#03A9F4"
+                        android:layout_marginEnd="8dp"/>
+                     
+                     <View
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:background="@drawable/museum"
+                        android:backgroundTint="#A0FFFFFF"
+                        android:layout_marginEnd="8dp"/>
+                         
+                     <View
+                         android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:background="@drawable/bg_white_rounded_square"
+                        android:backgroundTint="#A0FFFFFF"/>
+                 </LinearLayout>
+            </LinearLayout>
+
+
+            <!-- WHITE ROUNDED SHEET -->
+            <LinearLayout
+                android:id="@+id/content_sheet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="380dp"
+                android:orientation="vertical"
+                android:background="@drawable/bg_sheet_top_rounded"
+                android:paddingTop="32dp"
+                android:paddingBottom="40dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0">
+                
+                <!-- MENU ICONS -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp">
+
+                    <!-- Destinasi -->
+                    <LinearLayout
+                        android:id="@+id/btn_destinasi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            app:cardCornerRadius="32dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="#FFFFFF"
+                            android:outlineSpotShadowColor="#00000000"><!-- shadow managed manually or just use white circle -->
+                             <View
+                                 android:layout_width="match_parent"
+                                 android:layout_height="match_parent"
+                                 android:background="@drawable/bg_white_rounded_square"
+                                 android:backgroundTint="#FFFFFF"/> <!-- using drawable for circle -->
+                             <!-- Wait, CardView radius 32dp is circle. -->
+                             <ImageView
+                                 android:layout_width="match_parent"
+                                 android:layout_height="match_parent"
+                                 android:padding="18dp"
+                                 android:src="@drawable/icon_destinasi"
+                                 app:tint="#03A9F4"/>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Destinasi"
+                            android:textColor="#333333"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/poppins_medium"/>
+                    </LinearLayout>
+
+                    <!-- Paket Wisata -->
+                     <LinearLayout
+                        android:id="@+id/btn_paket_wisata"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            app:cardCornerRadius="32dp"
+                            app:cardElevation="0dp">
+                             <ImageView
+                                 android:layout_width="match_parent"
+                                 android:layout_height="match_parent"
+                                 android:padding="18dp"
+                                 android:src="@drawable/icon_destinasi"
+                                 app:tint="#03A9F4"/> 
+                            <!-- Using generic icon if koper not available, prompt said "Package" (koper icon) -->
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Paket Wisata"
+                            android:textColor="#333333"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/poppins_medium"/>
+                    </LinearLayout>
+
+                    <!-- Kuliner -->
+                    <LinearLayout
+                        android:id="@+id/btn_kuliner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            app:cardCornerRadius="32dp"
+                            app:cardElevation="0dp">
+                             <ImageView
+                                 android:layout_width="match_parent"
+                                 android:layout_height="match_parent"
+                                 android:padding="18dp"
+                                 android:src="@drawable/kuliner"
+                                 app:tint="#03A9F4"/>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Kuliner"
+                            android:textColor="#333333"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/poppins_medium"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <!-- Top Destinations Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="32dp"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp"
+                    android:gravity="center_vertical">
+                    
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Top Destinations"
+                        android:textColor="#333333"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/poppins_bold" />
+                    
+                    <TextView
+                         android:id="@+id/tv_see_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See All"
+                        android:textColor="#03A9F4"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_medium" />
+                </LinearLayout>
+
+                <!-- DESTINATION CONTENT -->
+                 <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/fragment_container"
+                    android:name="com.example.diswis.TopDestinationsFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp" />
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
@@ -282,11 +367,13 @@
     <LinearLayout
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:minHeight="60dp"
         android:background="#FFFFFF"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="4"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
@@ -302,8 +389,12 @@
             android:layout_width="0dp"
             android:layout_height="24dp"
             android:layout_weight="1"
-            android:src="@drawable/person"
-            app:tint="@android:color/black"/>
+            android:src="@drawable/ticket"
+            app:tint="@android:color/black"/> 
+        <!-- Image requests 'Shopping Bag' icon really, user said Paket Wisata is suitcase, but nav icons? 
+             Image shows: Home, Bag, Heart, Person. I'll stick to what I have or standard ones. 
+             Code had: home, person, love, settings. Image: Home, Bag, Heart, Person.
+             I'll update to match image better: Home, Ticket/Bag, Love, Person. -->
 
         <ImageView
             android:id="@+id/nav_fav"
@@ -314,11 +405,11 @@
             app:tint="@android:color/black"/>
 
         <ImageView
-            android:id="@+id/nav_settings"
+            android:id="@+id/nav_profile"
             android:layout_width="0dp"
             android:layout_height="24dp"
             android:layout_weight="1"
-            android:src="@drawable/settings"
+            android:src="@drawable/person"
             app:tint="@android:color/black"/>
     </LinearLayout>
 

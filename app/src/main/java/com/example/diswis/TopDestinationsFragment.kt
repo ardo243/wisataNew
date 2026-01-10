@@ -18,6 +18,9 @@ class TopDestinationsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_top_destinations, container, false)
     }
 
+    private lateinit var adapter: DestinationAdapter
+    private val originalDestinations = ArrayList<Destination>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -26,13 +29,24 @@ class TopDestinationsFragment : Fragment() {
         rvDestinations.isNestedScrollingEnabled = false // Important for nested scrolling in ActivityHome
 
         // Initialize data
-        val destinations = listOf(
-            Destination("Candi Prambanan", "Rp 50.000", R.drawable.candi_prambanan),
-            Destination("Candi Prambanan", "Rp 50.000", R.drawable.candi_prambanan),
-            Destination("Tempat Lain", "Rp 75.000", R.drawable.jogja)
-        )
+        // Initialize data
+        originalDestinations.add(Destination("Candi Prambanan", "Jl. Raya Solo - Yogyakarta No.16, Kranggan, Bokoharjo, Kec. Prambanan, Kabupaten Sleman, Daerah Istimewa Yogyakarta", "Rp 50.000", R.drawable.candi_prambanan))
+        originalDestinations.add(Destination("Candi Borobudur", "Jl. Badrawati, Kw. Candi Borobudur, Borobudur, Kec. Borobudur, Kabupaten Magelang, Jawa Tengah", "Rp 75.000", R.drawable.candi_prambanan))
+        originalDestinations.add(Destination("HeHa Sky View", "Jl. Dlingo-Patuk No.2, Patuk, Bukit, Kec. Patuk, Kabupaten Gunung Kidul, Daerah Istimewa Yogyakarta", "Rp 20.000", R.drawable.heha))
 
-        val adapter = DestinationAdapter(destinations)
+        // Pass a copy to the adapter initially
+        adapter = DestinationAdapter(ArrayList(originalDestinations))
         rvDestinations.adapter = adapter
+    }
+
+    fun filterDestinations(query: String) {
+        val filteredList = if (query.isEmpty()) {
+            originalDestinations
+        } else {
+            originalDestinations.filter { 
+                it.title.contains(query, ignoreCase = true) 
+            }
+        }
+        adapter.updateData(filteredList)
     }
 }
