@@ -1,23 +1,25 @@
 package com.example.diswis
 
-object WishlistManager {
-    private val wishlist = ArrayList<Destination>()
+import com.example.diswis.response.destinasi.Data
 
-    fun add(destination: Destination) {
-        if (wishlist.none { it.title == destination.title }) {
-            wishlist.add(destination)
+object WishlistManager {
+    private val wishlist = ArrayList<Data>()
+
+    fun add(data: Data) {
+        if (wishlist.none { it.nama_wisata == data.nama_wisata }) {
+            wishlist.add(data)
         }
     }
 
-    fun remove(destination: Destination) {
-        wishlist.removeAll { it.title == destination.title }
+    fun remove(data: Data) {
+        wishlist.removeAll { it.nama_wisata == data.nama_wisata }
     }
 
-    fun getAll(): ArrayList<Destination> {
+    fun getAll(): ArrayList<Data> {
         return wishlist
     }
     
-    fun isFavorite(title: String): Boolean {
-        return wishlist.any { it.title == title }
+    fun isFavorite(namaWisata: String): Boolean {
+        return wishlist.any { it.nama_wisata == namaWisata }
     }
 }

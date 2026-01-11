@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.diswis.api.ApiClient
-import com.example.diswis.api.models.LoginResponse
+import com.example.diswis.response.login.LoginResponse
 import com.example.diswis.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback

@@ -50,7 +50,7 @@ class ActivityHome : AppCompatActivity() {
         }
 
         findViewById<LinearLayout>(R.id.btn_kuliner).setOnClickListener {
-            // startActivity(Intent(this, KulinerActivity::class.java))
+            startActivity(Intent(this, KulinerActivity::class.java))
         }
 
         // ===== SEARCH FUNCTIONALITY =====

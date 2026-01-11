@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.diswis.api.ApiClient
-import com.example.diswis.api.models.RegisterResponse
+import com.example.diswis.response.register.RegisterResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

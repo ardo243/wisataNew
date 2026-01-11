@@ -1,35 +1,36 @@
 package com.example.diswis
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diswis.api.ApiClient
-import com.example.diswis.response.destinasi.Data
-import com.example.diswis.response.destinasi.Destinasi
+import com.example.diswis.response.kuliner.Data
+import com.example.diswis.response.kuliner.ResponKuliner
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DestinasiFragment : Fragment() {
+class Fragment_Kuliner : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: AdapterDestinasi
-    private val destinationList = ArrayList<Data>()
+    private lateinit var adapter: AdapterKuliner
+    private val kulinerList = ArrayList<Data>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_destinasi, container, false)
+        // Use fragment__kuliner (two underscores as per file name found)
+        val view = inflater.inflate(R.layout.fragment__kuliner, container, false)
 
         val btnBack = view.findViewById<ImageView>(R.id.btnBack)
         btnBack.setOnClickListener {
@@ -41,27 +42,25 @@ class DestinasiFragment : Fragment() {
         }
 
         // Initialize RecyclerView
-        recyclerView = view.findViewById(R.id.rvDestinasi)
+        recyclerView = view.findViewById(R.id.rvKuliner)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = AdapterDestinasi(destinationList)
+        adapter = AdapterKuliner(kulinerList)
         recyclerView.adapter = adapter
         
-        // Handle Item Click (Moved to Adapter)
-        // adapter.setOnItemClickCallback... removed
-
         // Fetch Data from API
-        fetchDestinations()
+        fetchKuliner()
 
-        // Search Functionality (Client-side filtering for now as API might not support search param yet)
-        val etSearch = view.findViewById<android.widget.EditText>(R.id.et_search_destinasi)
+        // Search Functionality
+        val etSearch = view.findViewById<EditText>(R.id.et_search_kuliner)
         etSearch.addTextChangedListener(object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Implementation for client-side search could go here
             }
             override fun afterTextChanged(s: android.text.Editable?) {}
         })
 
-        // Bottom Navigation - Wishlist
+        // Bottom Navigation - Wishlist (assuming duplicate logic from Destinasi)
         val navFav = view.findViewById<ImageView>(R.id.nav_fav)
         navFav.setOnClickListener {
             val transaction = parentFragmentManager.beginTransaction()
@@ -73,14 +72,19 @@ class DestinasiFragment : Fragment() {
         return view
     }
 
-    private fun fetchDestinations() {
-        ApiClient.instance.getDestinasi().enqueue(object : Callback<Destinasi> {
-            override fun onResponse(call: Call<Destinasi>, response: Response<Destinasi>) {
+    private fun fetchKuliner() {
+        ApiClient.instance.getKuliner().enqueue(object : Callback<ResponKuliner> {
+            override fun onResponse(call: Call<ResponKuliner>, response: Response<ResponKuliner>) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
-                    if (responseBody != null && responseBody.status) {
-                        adapter.updateData(responseBody.dataList)
-                        Toast.makeText(context, "Data: ${responseBody.dataList.size} item", Toast.LENGTH_SHORT).show()
+                    if (responseBody != null && responseBody.status == true) {
+                        // responseBody.data might be null safe check
+                        val data = responseBody.data
+                        if (data != null) {
+                            adapter.updateData(data)
+                        } else {
+                            Toast.makeText(context, "Data kosong", Toast.LENGTH_SHORT).show()
+                        }
                     } else {
                         Toast.makeText(context, "Data tidak ditemukan", Toast.LENGTH_SHORT).show()
                     }
@@ -89,8 +93,8 @@ class DestinasiFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<Destinasi>, t: Throwable) {
-                Log.e("DestinasiFragment", "onFailure: ${t.message}")
+            override fun onFailure(call: Call<ResponKuliner>, t: Throwable) {
+                Log.e("Fragment_Kuliner", "onFailure: ${t.message}")
                 Toast.makeText(context, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })

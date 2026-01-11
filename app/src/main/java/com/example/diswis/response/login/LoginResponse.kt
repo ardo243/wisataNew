@@ -1,6 +1,4 @@
-package com.example.diswis.api.models
-
-import com.google.gson.annotations.SerializedName
+package com.example.diswis.response.login
 
 data class LoginResponse(
     val status: Boolean,

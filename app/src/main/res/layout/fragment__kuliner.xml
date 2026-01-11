@@ -14,9 +14,6 @@
         android:scaleType="centerCrop"
         android:src="@drawable/candi_prambanan" />
 
-    <!-- Gradient Overlay for text visibility -->
-
-
     <!-- SCROLLABLE CONTENT -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -38,7 +35,7 @@
 
             <!-- SEARCH BAR -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/search_card_destinasi"
+                android:id="@+id/search_card_kuliner"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="20dp"
@@ -61,12 +58,12 @@
                         app:tint="@android:color/white" />
 
                     <EditText
-                        android:id="@+id/et_search_destinasi"
+                        android:id="@+id/et_search_kuliner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:background="@android:color/transparent"
-                        android:hint="Cari destinasi wisata..."
+                        android:hint="Cari kuliner khas..."
                         android:textColor="@android:color/white"
                         android:textColorHint="#DDDDDD"
                         android:textSize="14sp"
@@ -104,9 +101,9 @@
 
                 </RelativeLayout>
                 
-                <!-- RecyclerView for Destinations -->
+                <!-- RecyclerView for Kuliner -->
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvDestinasi"
+                    android:id="@+id/rvKuliner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false" />
@@ -137,7 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/poppins_bold"
-            android:text="Destinasi Populer"
+            android:text="Kuliner Populer"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 

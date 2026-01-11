@@ -1,8 +1,8 @@
 package com.example.diswis.api
 
+import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import com.google.gson.GsonBuilder
 
 object ApiClient {
 
@@ -10,7 +10,6 @@ object ApiClient {
         "http://10.0.2.2/api_wisata/index.php/"
 
     val instance: ApiService by lazy {
-
         val gson = GsonBuilder()
             .setLenient()
             .create()
@@ -21,5 +20,8 @@ object ApiClient {
             .build()
 
         retrofit.create(ApiService::class.java)
+
+
     }
+
 }

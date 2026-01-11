@@ -16,11 +16,11 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/ivDestination"
+            android:id="@+id/ivKuliner"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:scaleType="centerCrop"
-            tools:src="@drawable/candi_prambanan" /> <!-- MENGGUNAKAN tools:src -->
+            tools:src="@drawable/candi_prambanan" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,24 +29,24 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/tvDestinationName"
+                android:id="@+id/tvKulinerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:fontFamily="@font/poppins_bold"
                 android:textStyle="bold"
-                tools:text="Nama Wisata Database" />
+                tools:text="Nama Kuliner" />
 
             <TextView
-                android:id="@+id/tvDestinationLocation"
+                android:id="@+id/tvKulinerLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textColor="#000000"
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins_semibold"
-                tools:text="Lokasi dari API" />
+                tools:text="Lokasi Kuliner" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/tvDestinationPrice"
+                    android:id="@+id/tvKulinerhrg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

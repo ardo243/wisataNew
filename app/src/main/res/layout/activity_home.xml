@@ -179,16 +179,10 @@
                         android:backgroundTint="#A0FFFFFF"
                         android:layout_marginEnd="8dp"/>
                          
-                     <View
-                         android:layout_width="6dp"
-                        android:layout_height="6dp"
-                        android:background="@drawable/bg_white_rounded_square"
-                        android:backgroundTint="#A0FFFFFF"/>
+
                  </LinearLayout>
             </LinearLayout>
 
-
-            <!-- WHITE ROUNDED SHEET -->
             <LinearLayout
                 android:id="@+id/content_sheet"
                 android:layout_width="match_parent"
@@ -211,7 +205,7 @@
                     android:paddingStart="24dp"
                     android:paddingEnd="24dp">
 
-                    <!-- Destinasi -->
+
                     <LinearLayout
                         android:id="@+id/btn_destinasi"
                         android:layout_width="0dp"
@@ -226,13 +220,13 @@
                             app:cardCornerRadius="32dp"
                             app:cardElevation="0dp"
                             app:cardBackgroundColor="#FFFFFF"
-                            android:outlineSpotShadowColor="#00000000"><!-- shadow managed manually or just use white circle -->
+                            android:outlineSpotShadowColor="#00000000">
                              <View
                                  android:layout_width="match_parent"
                                  android:layout_height="match_parent"
                                  android:background="@drawable/bg_white_rounded_square"
-                                 android:backgroundTint="#FFFFFF"/> <!-- using drawable for circle -->
-                             <!-- Wait, CardView radius 32dp is circle. -->
+                                 android:backgroundTint="#FFFFFF"/>
+
                              <ImageView
                                  android:layout_width="match_parent"
                                  android:layout_height="match_parent"
@@ -338,17 +332,8 @@
                         android:textSize="18sp"
                         android:fontFamily="@font/poppins_bold" />
                     
-                    <TextView
-                         android:id="@+id/tv_see_all"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="See All"
-                        android:textColor="#03A9F4"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/poppins_medium" />
-                </LinearLayout>
 
-                <!-- DESTINATION CONTENT -->
+                </LinearLayout>
                  <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/fragment_container"
                     android:name="com.example.diswis.TopDestinationsFragment"
@@ -391,10 +376,6 @@
             android:layout_weight="1"
             android:src="@drawable/ticket"
             app:tint="@android:color/black"/> 
-        <!-- Image requests 'Shopping Bag' icon really, user said Paket Wisata is suitcase, but nav icons? 
-             Image shows: Home, Bag, Heart, Person. I'll stick to what I have or standard ones. 
-             Code had: home, person, love, settings. Image: Home, Bag, Heart, Person.
-             I'll update to match image better: Home, Ticket/Bag, Love, Person. -->
 
         <ImageView
             android:id="@+id/nav_fav"

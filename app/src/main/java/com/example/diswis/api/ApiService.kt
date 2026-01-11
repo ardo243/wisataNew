@@ -1,8 +1,13 @@
 package com.example.diswis.api
 
-import com.example.diswis.api.models.DestinasiResponse
-import com.example.diswis.api.models.LoginResponse
-import com.example.diswis.api.models.RegisterResponse
+import com.example.diswis.response.destinasi.DetailDestinasiResponse
+import com.example.diswis.DetailDestinasiActivity
+import com.example.diswis.response.destinasi.Destinasi
+import com.example.diswis.response.kuliner.ResponKuliner
+import com.example.diswis.response.login.LoginResponse
+import com.example.diswis.response.paket.PaketRespon
+import com.example.diswis.response.register.RegisterResponse
+import com.example.diswis.response.ulasan.Ulasanpengguna
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -25,16 +30,13 @@ interface ApiService {
         @Field("password") password: String
     ): Call<RegisterResponse>
 
-
-    // GET ALL
     @GET("destinasi")
-    fun getDestinasi(): Call<DestinasiResponse>
+    fun getDestinasi(): Call<Destinasi>
 
-    // GET DETAIL
     @GET("destinasi/detail/{id}")
     fun getDetailDestinasi(
         @Path("id") id: String
-    ): Call<DestinasiResponse>
+    ): Call<DetailDestinasiResponse>
 
     // CREATE
     @FormUrlEncoded
@@ -66,4 +68,62 @@ interface ApiService {
     fun deleteDestinasi(
         @Path("id") id: String
     ): Call<Map<String, Any>>
+
+    @GET("Ulasan")
+    fun getUlasan(
+        @Query("id_wisata") idWisata: Int,
+        @Query("tipe") tipe: String
+    ): Call<Ulasanpengguna>
+    @FormUrlEncoded
+    @POST("ulasan")
+    fun kirimUlasan(
+        @Field("id_user") idUser: Int,
+        @Field("id_wisata") idWisata: Int,
+        @Field("komentar") komentar: String,
+        @Field("tipe") tipe: String
+    ): Call<Map<String, Any>>
+
+    @GET("kuliner")
+    fun getKuliner(): Call<ResponKuliner>
+    @GET("kuliner")
+    fun getDetailKuliner(
+        @Query("id_kuliner") idKuliner: Int
+    ): Call<ResponKuliner>
+
+    @FormUrlEncoded
+    @POST("kuliner")
+    fun kirimKuliner(
+        @Field("id_user") idUser: Int,
+        @Field("nama_tempat") namaTempat: String,
+        @Field("deskripsi") deskripsi: String,
+        @Field("lokasi") lokasi: String,
+        @Field("jam_op") jamOp: String,
+        @Field("gambar") gambar: String // Biasanya berupa String URL atau Base64
+    ): Call<Map<String, Any>>
+//paket wisata
+
+    // 1. Mengambil semua daftar paket
+    @GET("paket")
+    fun getPaket(): Call<PaketRespon>
+
+    // 2. Mengambil detail paket berdasarkan ID
+    // Jika API Anda menggunakan query: paket?id_wisata=1
+    @GET("paket")
+    fun getDetailPaket(
+        @Query("id_wisata") idWisata: String
+    ): Call<PaketRespon>
+
+    // 3. Menambah/Kirim data paket baru (Contoh POST)
+    @FormUrlEncoded
+    @POST("paket")
+    fun kirimPaket(
+        @Field("nama_paket") namaPaket: String,
+        @Field("durasi") durasi: String,
+        @Field("harga") harga: String,
+        @Field("fasilitas") fasilitas: String,
+        @Field("deskripsi") deskripsi: String,
+        @Field("gambar") gambar: String,
+        @Field("id_wisata") idWisata: String
+    ): Call<PaketRespon>
+
 }

@@ -1,11 +1,11 @@
-package com.example.diswis.api.models
+package com.example.diswis.response.register
 
 import com.google.gson.annotations.SerializedName
 
 data class RegisterResponse(
     @SerializedName("status")
     val status: Boolean,
-    
+
     @SerializedName("message")
     val message: String
 )
