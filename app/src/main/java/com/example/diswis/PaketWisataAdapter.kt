@@ -14,9 +14,9 @@ class PaketWisataAdapter(private val packageList: List<PaketWisata>) :
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imgPackage: ImageView = view.findViewById(R.id.img_package)
         val tvTitle: TextView = view.findViewById(R.id.tv_title)
-        val tvDuration: TextView = view.findViewById(R.id.tv_duration)
+        val tvDuration: TextView = view.findViewById(R.id.tv_durationpaket)
         val tvDescription: TextView = view.findViewById(R.id.tv_description)
-        val tvPrice: TextView = view.findViewById(R.id.tv_price)
+        val tvPrice: TextView = view.findViewById(R.id.tv_total_price)
         val btnPesan: Button = view.findViewById(R.id.btn_pesan)
     }
 

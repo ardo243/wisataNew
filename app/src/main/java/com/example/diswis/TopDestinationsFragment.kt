@@ -1,44 +1,94 @@
 package com.example.diswis
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.diswis.api.ApiClient
+import com.example.diswis.response.destinasi.Data
+import com.example.diswis.response.destinasi.Destinasi
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TopDestinationsFragment : Fragment() {
+
+    private lateinit var adapter: AdapterTopDestinations
+    private val listDestinasi = ArrayList<Data>() // Displayed List
+    private val fullList = ArrayList<Data>()      // Original Data Backup
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_top_destinations, container, false)
     }
-    private lateinit var adapter: AdapterTopDestinations
-    private val originalDestinations = ArrayList<Destination>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val rvDestinations = view.findViewById<RecyclerView>(R.id.rv_paket_wisata)
         rvDestinations.layoutManager = LinearLayoutManager(context)
-        rvDestinations.isNestedScrollingEnabled = false // Important for nested scrolling in ActivityHome
-        // Initialize data
-        // Initialize data
-        originalDestinations.add(Destination("Candi Prambanan", "Jl. Raya Solo - Yogyakarta No.16, Kranggan, Bokoharjo, Kec. Prambanan, Kabupaten Sleman, Daerah Istimewa Yogyakarta", "Rp 50.000", R.drawable.candi_prambanan))
-        originalDestinations.add(Destination("Candi Borobudur", "Jl. Badrawati, Kw. Candi Borobudur, Borobudur, Kec. Borobudur, Kabupaten Magelang, Jawa Tengah", "Rp 75.000", R.drawable.candi_prambanan))
-        originalDestinations.add(Destination("HeHa Sky View", "Jl. Dlingo-Patuk No.2, Patuk, Bukit, Kec. Patuk, Kabupaten Gunung Kidul, Daerah Istimewa Yogyakarta", "Rp 20.000", R.drawable.heha))
+        rvDestinations.isNestedScrollingEnabled = false
 
-        // Pass a copy to the adapter initially
-        adapter = AdapterTopDestinations(ArrayList(originalDestinations))
+        adapter = AdapterTopDestinations(listDestinasi)
         rvDestinations.adapter = adapter
+
+        // Setup Click Listener
+        adapter.setOnItemClickCallback(object : AdapterTopDestinations.OnItemClickCallback {
+            override fun onItemClicked(data: Data) {
+                val intent = Intent(requireContext(), DetailDestinasiActivity::class.java)
+                intent.putExtra("id_wisata", data.id_wisata) // Pass ID as String
+                startActivity(intent)
+            }
+        })
+
+        fetchDestinations()
     }
 
-    fun filterDestinations(query: String) {
+    private fun fetchDestinations() {
+        ApiClient.instance.getDestinasi().enqueue(object : Callback<Destinasi> {
+            override fun onResponse(call: Call<Destinasi>, response: Response<Destinasi>) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null && responseBody.status) {
+                        listDestinasi.clear()
+                        fullList.clear() // Clear backup too
+                        
+                        listDestinasi.addAll(responseBody.dataList)
+                        fullList.addAll(responseBody.dataList) // Populate backup
+                        
+                        adapter.notifyDataSetChanged()
+                    } else {
+                        Toast.makeText(context, "Data Kosong", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Log.e("TopDestinations", "Error: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<Destinasi>, t: Throwable) {
+                Log.e("TopDestinations", "Failure: ${t.message}")
+                // Optional: Show error toast only if context is valid
+                if (isAdded) {
+                    Toast.makeText(context, "Gagal memuat data", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+    
+     fun filterDestinations(query: String) {
         val filteredList = if (query.isEmpty()) {
-            originalDestinations
+            fullList // Restore from backup
         } else {
-            originalDestinations.filter { 
-                it.title.contains(query, ignoreCase = true) 
+            fullList.filter { 
+                it.nama_wisata?.contains(query, ignoreCase = true) == true
             }
         }
         adapter.updateData(filteredList)

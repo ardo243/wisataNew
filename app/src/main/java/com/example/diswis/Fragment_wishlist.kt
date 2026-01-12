@@ -31,7 +31,7 @@ class Fragment_wishlist : Fragment() {
         val btnBack = view.findViewById<ImageView>(R.id.btnBack)
 
         rvWishlist.layoutManager = LinearLayoutManager(context)
-        adapter = AdapterDestinasi(ArrayList())
+        adapter = AdapterDestinasi(ArrayList(), isWishlistPage = true)
         rvWishlist.adapter = adapter
 
         btnBack.setOnClickListener {

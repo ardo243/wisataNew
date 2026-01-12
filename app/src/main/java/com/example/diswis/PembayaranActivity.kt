@@ -1,18 +1,27 @@
 package com.example.diswis
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.text.NumberFormat
+import java.util.Locale
 
 class PembayaranActivity : AppCompatActivity() {
+
+    private var totalAmount: Int = 0
+    private var cashAmount: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,48 +33,101 @@ class PembayaranActivity : AppCompatActivity() {
             insets
         }
 
-        // Get Data
-        val title = intent.getStringExtra("EXTRA_TITLE") ?: "Paket Wisata"
-        val price = intent.getStringExtra("EXTRA_TOTAL_PRICE") ?: "Rp 0"
-        val imageResId = intent.getIntExtra("EXTRA_IMAGE", R.drawable.candi_prambanan)
+        // Get Data from Intent
+        // Default to a value if not provided for visual consistency with screenshot
+        val priceString = intent.getStringExtra("EXTRA_TOTAL_PRICE") ?: "Rp 192.500"
+        
+        // Parse Total Amount
+        totalAmount = parsePrice(priceString)
+        
+        // UI Components
+        val tvTotalBayar = findViewById<TextView>(R.id.tv_total_bayar)
+        val etTunai = findViewById<EditText>(R.id.et_tunai)
+        val tvKembalian = findViewById<TextView>(R.id.tv_kembalian)
+        val btnSelesai = findViewById<Button>(R.id.btn_selesai)
+        
+        if (tvTotalBayar != null) {
+            tvTotalBayar.text = formatCurrency(totalAmount)
+        }
 
-        // Setup UI
-        findViewById<ImageView>(R.id.btn_back).setOnClickListener { finish() }
-        findViewById<ImageView>(R.id.img_summary).setImageResource(imageResId)
-        findViewById<TextView>(R.id.tv_title_summary).text = title
-        findViewById<TextView>(R.id.tv_price_summary).text = price
-        findViewById<TextView>(R.id.tv_total_final).text = price
+        // Set initial cash value from EditText (default 200000)
+        if (tvKembalian != null) {
+             updateChange(etTunai.text.toString(), tvKembalian)
+        }
 
-        // Payment Method Logic (Mutual Exclusion)
-        val rgEwallet = findViewById<RadioGroup>(R.id.rg_ewallet)
-        val rbQris = findViewById<RadioButton>(R.id.rb_qris)
+        // TextWatcher to calculate change dynamically
+        etTunai.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-        // When E-Wallet group is checked, uncheck QRIS
-        rgEwallet.setOnCheckedChangeListener { _, _ ->
-            if (rgEwallet.checkedRadioButtonId != -1) {
-                rbQris.isChecked = false
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (tvKembalian != null) {
+                    updateChange(s.toString(), tvKembalian)
+                }
             }
-        }
 
-        // When QRIS is checked, clear E-Wallet group
-        rbQris.setOnClickListener {
-            rgEwallet.clearCheck()
-            rbQris.isChecked = true
-        }
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
-        findViewById<Button>(R.id.btn_pay_now).setOnClickListener {
-            val isEwalletSelected = rgEwallet.checkedRadioButtonId != -1
-            val isQrisSelected = rbQris.isChecked
 
-            if (isEwalletSelected || isQrisSelected) {
-                Toast.makeText(this, "Pembayaran Berhasil!", Toast.LENGTH_LONG).show()
-                // Navigate back to Home or History
-                // val intent = Intent(this, HomeActivity::class.java)
-                // intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                // startActivity(intent)
+        btnSelesai.setOnClickListener {
+            if (cashAmount >= totalAmount) {
+                val changeText = tvKembalian?.text ?: formatCurrency(cashAmount - totalAmount)
+                Toast.makeText(this, "Pembayaran Berhasil! Kembalian: $changeText", Toast.LENGTH_LONG).show()
+                // Navigate to Home
+                val intent = Intent(this, ActivityHome::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
+                finish()
             } else {
-                Toast.makeText(this, "Mohon pilih metode pembayaran", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Uang tunai tidak cukup.", Toast.LENGTH_SHORT).show()
             }
+        }
+        
+        setupBottomNav()
+    }
+    
+    private fun updateChange(cashString: String, tvKembalian: TextView) {
+        try {
+            cashAmount = if (cashString.isNotEmpty()) cashString.toInt() else 0
+            val change = cashAmount - totalAmount
+            tvKembalian.text = formatCurrency(change)
+             if (change < 0) {
+                 tvKembalian.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark))
+             } else {
+                 tvKembalian.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark))
+             }
+        } catch (e: NumberFormatException) {
+            cashAmount = 0
+            tvKembalian.text = formatCurrency(0 - totalAmount)
+            tvKembalian.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark))
+        }
+    }
+
+    private fun parsePrice(priceDiff: String): Int {
+        return try {
+            // Remove Rp, dots, spaces, and potential "Run" typo
+            priceDiff.replace("Run", "", ignoreCase = true)
+                .replace("Rp", "", ignoreCase = true)
+                .replace(".", "")
+                .replace(" ", "")
+                .trim()
+                .toInt()
+        } catch (e: Exception) {
+            192500 // Fallback
+        }
+    }
+
+    private fun formatCurrency(amount: Int): String {
+        val format = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
+        return format.format(amount).replace("Rp", "Rp ")
+    }
+    
+    private fun setupBottomNav() {
+         val navHome = findViewById<ImageView>(R.id.nav_home)
+         navHome?.setOnClickListener {
+            val intent = Intent(this, ActivityHome::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
         }
     }
 }

@@ -20,15 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- HERO IMAGE (Behind content) -->
-            <ImageView
-                android:id="@+id/hero_image"
+            <!-- HERO CAROUSEL (Behind content) -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/hero_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="480dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/candi_prambanan" 
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/candi_prambanan" />
+                app:layout_constraintTop_toTopOf="parent" />
              <!-- Note: src should be Puncak Segoro if available, I'll use candi_prambanan as placeholder or check if user uploaded one. 
                   Prompt says "Puncak Segoro", I don't have that file name in my list, I recall seeing 'heha.jpg' or similar. 
                   I'll use 'candi_prambanan' for now, user can change. Or wait, 'heha.jpg' might be better. -->
@@ -135,6 +132,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/content_sheet">
 
                 <TextView
+                    android:id="@+id/tv_hero_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Puncak Segoro"
@@ -147,6 +145,7 @@
                     android:shadowRadius="2"/>
 
                 <TextView
+                    android:id="@+id/tv_hero_subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rasakan sensasi liburan eksotis di atas\ntebing laut Yogyakarta"
@@ -367,7 +366,7 @@
             android:layout_height="24dp"
             android:layout_weight="1"
             android:src="@drawable/home"
-            app:tint="@android:color/black"/>
+            app:tint="#1A237E"/>
 
         <ImageView
             android:id="@+id/nav_user"

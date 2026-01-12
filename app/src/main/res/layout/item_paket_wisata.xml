@@ -4,19 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
     app:cardCornerRadius="24dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@android:color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp">
+        android:paddingBottom="20dp">
 
         <ImageView
             android:id="@+id/img_package"
             android:layout_width="0dp"
-            android:layout_height="180dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:src="@drawable/candi_prambanan"
             app:layout_constraintEnd_toEndOf="parent"
@@ -24,22 +26,27 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
+        <!-- Duration Badge -->
         <TextView
-            android:id="@+id/tv_duration"
+            android:id="@+id/tv_durationpaket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
-            android:background="#99000000"
+            android:background="@drawable/bg_white_rounded_square"
+            android:backgroundTint="#99000000"
             android:drawablePadding="4dp"
-            android:paddingStart="8dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="4dp"
-            android:text="1 Hari"
+            android:gravity="center_vertical"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="6dp"
+            android:text="3 Hari"
             android:textColor="@android:color/white"
             android:textSize="12sp"
+            android:textStyle="bold"
             app:drawableStartCompat="@android:drawable/ic_menu_recent_history"
+            app:drawableTint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="@+id/img_package"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -47,93 +54,51 @@
             android:id="@+id/tv_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="16dp"
-            android:text="Embung Tambak Boyo &amp; Prambanan"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:text="Paket Eksplorasi Budaya"
+            android:textColor="#000000"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_package" />
 
         <TextView
-            android:id="@+id/tv_description"
+            android:id="@+id/tv_descriptionpaketwis"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
             android:ellipsize="end"
-            android:maxLines="2"
-            android:text="Suasana embung yang menarik dan anda bisa menyaksikan candi yang menjadi saksi bisu"
+            android:maxLines="3"
+            android:text="Menelusuri sejarah kerajaan dan tradisi luhur Yogyakarta yang masih terjaga."
             android:textColor="#757575"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
         <!-- Tags Container -->
-        <LinearLayout
-            android:id="@+id/layout_tags"
+        <HorizontalScrollView
+            android:id="@+id/scroll_tags"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:orientation="horizontal"
+            android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_description">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:background="#E0E0E0"
-                android:paddingStart="12dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="12dp"
-                android:paddingBottom="4dp"
-                android:text="Snack"
-                android:textColor="#424242"
-                android:textSize="12sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:background="#E0E0E0"
-                android:paddingStart="12dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="12dp"
-                android:paddingBottom="4dp"
-                android:text="Makan siang"
-                android:textColor="#424242"
-                android:textSize="12sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#E0E0E0"
-                android:paddingStart="12dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="12dp"
-                android:paddingBottom="4dp"
-                android:text="Pemandu"
-                android:textColor="#424242"
-                android:textSize="12sp" />
-
-        </LinearLayout>
-
+        </HorizontalScrollView>
 
         <TextView
-            android:id="@+id/tv_price"
+            android:id="@+id/tv_pricepaket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="80k"
+            android:text="1.5jt"
             android:textColor="#039BE5"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/btn_pesan"
             app:layout_constraintStart_toStartOf="@+id/tv_title"
@@ -143,24 +108,43 @@
             android:id="@+id/tv_per_person"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="4dp"
             android:text="/Orang"
-            android:textColor="#424242"
+            android:textColor="#9E9E9E"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_price"
-            app:layout_constraintStart_toEndOf="@+id/tv_price" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_pricepaket"
+            app:layout_constraintStart_toEndOf="@+id/tv_pricepaket" />
 
         <Button
             android:id="@+id/btn_pesan"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="332dp"
+            android:layout_marginEnd="32dp"
             android:backgroundTint="#039BE5"
-            android:minHeight="40dp"
             android:text="Pesan"
             android:textAllCaps="false"
+            android:textStyle="bold"
+            app:cornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_tags" />
+            app:layout_constraintTop_toBottomOf="@+id/scroll_tags" />
+
+        <LinearLayout
+            android:id="@+id/layout_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_pricepaket"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_descriptionpaketwis">
+            
+            <!-- Tags will be added dynamically via Adapter -->
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

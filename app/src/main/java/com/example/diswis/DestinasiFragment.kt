@@ -22,7 +22,8 @@ class DestinasiFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AdapterDestinasi
-    private val destinationList = ArrayList<Data>()
+    private val destinationList = ArrayList<Data>() // Displayed list
+    private val fullList = ArrayList<Data>()      // Original Data Backup
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,17 +47,15 @@ class DestinasiFragment : Fragment() {
         adapter = AdapterDestinasi(destinationList)
         recyclerView.adapter = adapter
         
-        // Handle Item Click (Moved to Adapter)
-        // adapter.setOnItemClickCallback... removed
-
         // Fetch Data from API
         fetchDestinations()
 
-        // Search Functionality (Client-side filtering for now as API might not support search param yet)
+        // Search Functionality
         val etSearch = view.findViewById<android.widget.EditText>(R.id.et_search_destinasi)
         etSearch.addTextChangedListener(object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterDestinations(s.toString())
             }
             override fun afterTextChanged(s: android.text.Editable?) {}
         })
@@ -79,8 +78,14 @@ class DestinasiFragment : Fragment() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null && responseBody.status) {
-                        adapter.updateData(responseBody.dataList)
-                        Toast.makeText(context, "Data: ${responseBody.dataList.size} item", Toast.LENGTH_SHORT).show()
+                        destinationList.clear()
+                        fullList.clear()
+                        
+                        destinationList.addAll(responseBody.dataList)
+                        fullList.addAll(responseBody.dataList)
+                        
+                        adapter.notifyDataSetChanged()
+                        // Toast.makeText(context, "Data: ${responseBody.dataList.size} item", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(context, "Data tidak ditemukan", Toast.LENGTH_SHORT).show()
                     }
@@ -91,8 +96,19 @@ class DestinasiFragment : Fragment() {
 
             override fun onFailure(call: Call<Destinasi>, t: Throwable) {
                 Log.e("DestinasiFragment", "onFailure: ${t.message}")
-                Toast.makeText(context, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                // Toast.makeText(context, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun filterDestinations(query: String) {
+        val filteredList = if (query.isEmpty()) {
+            fullList
+        } else {
+            fullList.filter {
+                it.nama_wisata?.contains(query, ignoreCase = true) == true
+            }
+        }
+        adapter.updateData(filteredList)
     }
 }

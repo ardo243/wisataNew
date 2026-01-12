@@ -17,8 +17,8 @@ import java.util.Locale
 class AturJadwalActivity : AppCompatActivity() {
 
     private var basePrice: Int = 0
-    private var adultCount: Int = 1
-    private var childCount: Int = 0
+    private var ticketCount: Int = 1
+    // Removed separate child count as per new UI design which shows a single "Total Tiket"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,9 @@ class AturJadwalActivity : AppCompatActivity() {
         // Setup UI
         findViewById<ImageView>(R.id.btn_back).setOnClickListener { finish() }
         findViewById<TextView>(R.id.tv_package_name_detail).text = title
-        findViewById<TextView>(R.id.tv_price_detail).text = priceString
+        // Price detail removed from card in new design or can be added back if needed, currently not in mapped IDs of new XML for card detail
+        // But we have total price at bottom
+        
         findViewById<ImageView>(R.id.img_selected_package).setImageResource(imageResId)
 
         setupCounters()
@@ -69,42 +71,29 @@ class AturJadwalActivity : AppCompatActivity() {
     }
 
     private fun setupCounters() {
-        val tvAdult = findViewById<TextView>(R.id.tv_count_adult)
-        val tvChild = findViewById<TextView>(R.id.tv_count_child)
+        val tvCount = findViewById<TextView>(R.id.tv_count_adult) // Reused ID for general ticket count
+        tvCount.text = ticketCount.toString()
 
         findViewById<ImageView>(R.id.btn_minus_adult).setOnClickListener {
-            if (adultCount > 1) {
-                adultCount--
-                tvAdult.text = adultCount.toString()
+            if (ticketCount > 1) {
+                ticketCount--
+                tvCount.text = ticketCount.toString()
                 updateTotalPrice()
             }
         }
 
         findViewById<ImageView>(R.id.btn_plus_adult).setOnClickListener {
-            adultCount++
-            tvAdult.text = adultCount.toString()
-            updateTotalPrice()
-        }
-
-        findViewById<ImageView>(R.id.btn_minus_child).setOnClickListener {
-            if (childCount > 0) {
-                childCount--
-                tvChild.text = childCount.toString()
-                updateTotalPrice()
-            }
-        }
-
-        findViewById<ImageView>(R.id.btn_plus_child).setOnClickListener {
-            childCount++
-            tvChild.text = childCount.toString()
+            ticketCount++
+            tvCount.text = ticketCount.toString()
             updateTotalPrice()
         }
     }
 
     private fun updateTotalPrice() {
-        val total = (adultCount * basePrice) + (childCount * basePrice)
+        val total = ticketCount * basePrice
         
         val format = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
         findViewById<TextView>(R.id.tv_total_price).text = format.format(total).replace("Rp", "Rp ")
+        findViewById<TextView>(R.id.tv_total_tickets_label).text = "$ticketCount Tiket"
     }
 }

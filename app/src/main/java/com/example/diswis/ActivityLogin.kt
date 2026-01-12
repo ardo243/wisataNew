@@ -11,7 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.diswis.api.ApiClient
 import com.example.diswis.response.login.LoginResponse
-import com.example.diswis.utils.SessionManager
+// import com.example.diswis.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,14 +21,12 @@ class ActivityLogin : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val sessionManager = SessionManager(this)
-
-        // ✅ AUTO LOGIN
-        if (sessionManager.isLoggedIn()) {
-            startActivity(Intent(this, ActivityHome::class.java))
-            finish()
-            return
-        }
+        // SessionManager logic removed
+        // if (sessionManager.isLoggedIn()) {
+        //    startActivity(Intent(this, ActivityHome::class.java))
+        //    finish()
+        //    return
+        // }
 
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
@@ -67,14 +65,14 @@ class ActivityLogin : AppCompatActivity() {
                         // ✅ VALIDASI LENGKAP
                         if (loginResponse != null &&
                             loginResponse.status &&
-                            loginResponse.data.logged_in
+                            loginResponse.data.loggedIn
                         ) {
 
-                            // ✅ SIMPAN SESSION DARI DATA API
-                            sessionManager.createLoginSession(
-                                email = loginResponse.data.email,
-                                nama = loginResponse.data.username
-                            )
+                            // ✅ SESSION DISABLED
+                            // sessionManager.createLoginSession(
+                            //     email = loginResponse.data.email,
+                            //     nama = loginResponse.data.username
+                            // )
 
                             Toast.makeText(
                                 this@ActivityLogin,

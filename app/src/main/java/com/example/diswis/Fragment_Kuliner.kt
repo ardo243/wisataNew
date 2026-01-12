@@ -22,7 +22,8 @@ class Fragment_Kuliner : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AdapterKuliner
-    private val kulinerList = ArrayList<Data>()
+    private val kulinerList = ArrayList<Data>() // Displayed List
+    private val fullList = ArrayList<Data>()      // Original Data Backup
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +56,7 @@ class Fragment_Kuliner : Fragment() {
         etSearch.addTextChangedListener(object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Implementation for client-side search could go here
+                filterKuliner(s.toString())
             }
             override fun afterTextChanged(s: android.text.Editable?) {}
         })
@@ -81,7 +82,13 @@ class Fragment_Kuliner : Fragment() {
                         // responseBody.data might be null safe check
                         val data = responseBody.data
                         if (data != null) {
-                            adapter.updateData(data)
+                            kulinerList.clear()
+                            fullList.clear()
+                            
+                            kulinerList.addAll(data)
+                            fullList.addAll(data)
+                            
+                            adapter.notifyDataSetChanged()
                         } else {
                             Toast.makeText(context, "Data kosong", Toast.LENGTH_SHORT).show()
                         }
@@ -98,5 +105,16 @@ class Fragment_Kuliner : Fragment() {
                 Toast.makeText(context, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun filterKuliner(query: String) {
+        val filteredList = if (query.isEmpty()) {
+            fullList
+        } else {
+            fullList.filter {
+                it.namaTempat?.contains(query, ignoreCase = true) == true
+            }
+        }
+        adapter.updateData(filteredList)
     }
 }

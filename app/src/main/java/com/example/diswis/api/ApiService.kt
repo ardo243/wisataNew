@@ -106,12 +106,6 @@ interface ApiService {
     @GET("paket")
     fun getPaket(): Call<PaketRespon>
 
-    // 2. Mengambil detail paket berdasarkan ID
-    // Jika API Anda menggunakan query: paket?id_wisata=1
-    @GET("paket")
-    fun getDetailPaket(
-        @Query("id_wisata") idWisata: String
-    ): Call<PaketRespon>
 
     // 3. Menambah/Kirim data paket baru (Contoh POST)
     @FormUrlEncoded

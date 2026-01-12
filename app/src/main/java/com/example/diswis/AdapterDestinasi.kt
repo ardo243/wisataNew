@@ -10,12 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.diswis.response.destinasi.Data
 import com.squareup.picasso.Picasso
 
-class AdapterDestinasi(private val listDestinasi: ArrayList<Data>) :
-    RecyclerView.Adapter<AdapterDestinasi.ViewHolder>() {
+class AdapterDestinasi(
+    private val listDestinasi: ArrayList<Data>,
+    private val isWishlistPage: Boolean = false
+) : RecyclerView.Adapter<AdapterDestinasi.ViewHolder>() {
 
     // 1. ViewHolder untuk menghubungkan ID di XML
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val ivDestination: ImageView = itemView.findViewById(R.id.ivDestination)
+        private val ivWishlist: ImageView = itemView.findViewById(R.id.iv_wishlist) // Bind Love Icon
         private val tvDestinationName: TextView = itemView.findViewById(R.id.tvDestinationName)
         private val tvDestinationLocation: TextView = itemView.findViewById(R.id.tvDestinationLocation)
         private val tvDestinationPrice: TextView = itemView.findViewById(R.id.tvDestinationPrice)
@@ -33,6 +36,41 @@ class AdapterDestinasi(private val listDestinasi: ArrayList<Data>) :
                 .placeholder(R.drawable.candi_prambanan)
                 .error(android.R.color.darker_gray)
                 .into(ivDestination)
+
+            // WISHLIST LOGIC
+            val context = itemView.context
+            
+            val isFavorite = WishlistManager.isFavorite(data.nama_wisata ?: "")
+            if (isFavorite) {
+                ivWishlist.setColorFilter(android.graphics.Color.RED)
+            } else {
+                 ivWishlist.setColorFilter(android.graphics.Color.WHITE)
+            }
+    
+            ivWishlist.setOnClickListener {
+                if (WishlistManager.isFavorite(data.nama_wisata ?: "")) {
+                    WishlistManager.remove(data)
+                    ivWishlist.setColorFilter(android.graphics.Color.WHITE)
+                    android.widget.Toast.makeText(context, "Dihapus dari Wishlist", android.widget.Toast.LENGTH_SHORT).show()
+                    
+                    if (isWishlistPage) {
+                        try {
+                            val pos = adapterPosition
+                            if (pos != RecyclerView.NO_POSITION) {
+                                listDestinasi.removeAt(pos)
+                                notifyItemRemoved(pos)
+                                notifyItemRangeChanged(pos, listDestinasi.size)
+                            }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+                } else {
+                    WishlistManager.add(data)
+                    ivWishlist.setColorFilter(android.graphics.Color.RED)
+                    android.widget.Toast.makeText(context, "Ditambahkan ke Wishlist", android.widget.Toast.LENGTH_SHORT).show()
+                }
+            }
 
             // FITUR KLIK: Berpindah ke DetailDestinasiActivity
             itemView.setOnClickListener {

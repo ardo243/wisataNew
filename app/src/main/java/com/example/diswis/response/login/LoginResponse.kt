@@ -1,15 +1,10 @@
 package com.example.diswis.response.login
-
+import com.google.gson.annotations.SerializedName
 data class LoginResponse(
-    val status: Boolean,
+    @SerializedName("data")
+    val `data`: Data,
+    @SerializedName("message")
     val message: String,
-    val data: UserData
-)
-
-data class UserData(
-    val id_user: String,
-    val username: String,
-    val email: String,
-    val level: String,
-    val logged_in: Boolean
+    @SerializedName("status")
+    val status: Boolean
 )
