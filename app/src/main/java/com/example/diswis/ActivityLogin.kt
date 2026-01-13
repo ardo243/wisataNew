@@ -11,22 +11,22 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.diswis.api.ApiClient
 import com.example.diswis.response.login.LoginResponse
-// import com.example.diswis.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ActivityLogin : AppCompatActivity() {
 
+    private lateinit var sessionManager: SessionManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // SessionManager logic removed
-        // if (sessionManager.isLoggedIn()) {
-        //    startActivity(Intent(this, ActivityHome::class.java))
-        //    finish()
-        //    return
-        // }
+        sessionManager = SessionManager(this)
+
+        if (sessionManager.isLoggedIn()) {
+             sessionManager.logout()
+        }
 
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
@@ -62,17 +62,14 @@ class ActivityLogin : AppCompatActivity() {
 
                         val loginResponse = response.body()
 
-                        // ✅ VALIDASI LENGKAP
                         if (loginResponse != null &&
                             loginResponse.status &&
                             loginResponse.data.loggedIn
                         ) {
-
-                            // ✅ SESSION DISABLED
-                            // sessionManager.createLoginSession(
-                            //     email = loginResponse.data.email,
-                            //     nama = loginResponse.data.username
-                            // )
+                            sessionManager.createLoginSession(
+                                email = loginResponse.data.email,
+                                username = loginResponse.data.username
+                            )
 
                             Toast.makeText(
                                 this@ActivityLogin,

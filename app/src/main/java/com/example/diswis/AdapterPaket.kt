@@ -76,6 +76,10 @@ class AdapterPaket(
             }
         }
 
+        holder.itemView.findViewById<android.widget.Button>(R.id.btn_pesan).setOnClickListener {
+            onClick(item)
+        }
+        
         holder.itemView.setOnClickListener {
             onClick(item)
         }

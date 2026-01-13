@@ -21,6 +21,9 @@ data class Data(
     @SerializedName("id_wisata")
     val idWisata: String?, // Menggunakan camelCase agar standar Kotlin
 
+    @SerializedName("id_paket")
+    val idPaket: String?,
+
     @SerializedName("nama_paket")
     val namaPaket: String? // Menggunakan camelCase
 )

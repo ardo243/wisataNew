@@ -35,6 +35,7 @@ class AturJadwalActivity : AppCompatActivity() {
         val title = intent.getStringExtra("EXTRA_TITLE") ?: "Paket Wisata"
         val priceString = intent.getStringExtra("EXTRA_PRICE") ?: "0k"
         val imageResId = intent.getIntExtra("EXTRA_IMAGE", R.drawable.candi_prambanan)
+        val idWisata = intent.getStringExtra("EXTRA_ID_WISATA") ?: ""
 
         // Parse price (assuming "80k" format -> 80000)
         basePrice = parsePrice(priceString)
@@ -47,24 +48,61 @@ class AturJadwalActivity : AppCompatActivity() {
         
         findViewById<ImageView>(R.id.img_selected_package).setImageResource(imageResId)
 
+        // Setup Counters
         setupCounters()
         updateTotalPrice()
+
+        var selectedDate = ""
+        val calendarView = findViewById<CalendarView>(R.id.calendarView)
+        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            // Format: YYYY-MM-DD
+            selectedDate = "$year-${month + 1}-$dayOfMonth"
+        }
+
+        // Set default date to today if not selected
+        if (selectedDate.isEmpty()) {
+            val calendar = java.util.Calendar.getInstance()
+            selectedDate = "${calendar.get(java.util.Calendar.YEAR)}-${calendar.get(java.util.Calendar.MONTH) + 1}-${calendar.get(java.util.Calendar.DAY_OF_MONTH)}"
+        }
         
         findViewById<Button>(R.id.btn_pesan_sekarang).setOnClickListener {
-            // Toast.makeText(this, "Pesanan berhasil dibuat!", Toast.LENGTH_SHORT).show()
-            val totalPrice = findViewById<TextView>(R.id.tv_total_price).text.toString()
-            
+            // Recalculate total to be sure
+            val total = ticketCount * basePrice
+            val format = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
+            val totalPriceString = format.format(total).replace("Rp", "Rp ")
+
             val intent = Intent(this, PembayaranActivity::class.java)
             intent.putExtra("EXTRA_TITLE", title)
-            intent.putExtra("EXTRA_TOTAL_PRICE", totalPrice)
+            intent.putExtra("EXTRA_TOTAL_PRICE", totalPriceString) // Keep for compatibility if needed, but we will use INT preferably
+            intent.putExtra("EXTRA_TOTAL_AMOUNT", total) // Pass raw int
             intent.putExtra("EXTRA_IMAGE", imageResId)
+            intent.putExtra("EXTRA_DATE", selectedDate)
+            intent.putExtra("EXTRA_TICKET_COUNT", ticketCount)
+            intent.putExtra("EXTRA_ID_WISATA", idWisata)
             startActivity(intent)
         }
     }
 
     private fun parsePrice(priceDiff: String): Int {
         return try {
-            priceDiff.replace("k", "000").replace("K", "000").replace("Rp", "").replace(".", "").replace(" ", "").toInt()
+            var cleanPrice = priceDiff.replace("Rp", "").replace(" ", "").lowercase()
+            
+            if (cleanPrice.contains("jt")) {
+                cleanPrice = cleanPrice.replace("jt", "")
+                val value = cleanPrice.toDoubleOrNull() ?: 0.0
+                (value * 1_000_000).toInt()
+            } else if (cleanPrice.contains("k")) {
+                 cleanPrice = cleanPrice.replace("k", "")
+                 // If there's a dot or comma in "80.5k" or similar? Assuming simple cases for now or standard format
+                 cleanPrice = cleanPrice.replace(".", "") // remove thousands separator points if any, BUT care if it is decimal
+                 // Actually standard "80k" is 80000. "1.5jt" is 1500000.
+                 val value = cleanPrice.toIntOrNull() ?: 0
+                 value * 1000
+            } else {
+                 // Standard number parsing
+                 cleanPrice = cleanPrice.replace(".", "") // Remove points used as thousands separators in ID format
+                 cleanPrice.toInt()
+            }
         } catch (e: Exception) {
             0
         }

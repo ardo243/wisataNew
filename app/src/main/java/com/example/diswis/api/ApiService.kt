@@ -2,6 +2,8 @@ package com.example.diswis.api
 
 import com.example.diswis.response.destinasi.DetailDestinasiResponse
 import com.example.diswis.DetailDestinasiActivity
+import com.example.diswis.response.Detail_Transaksi.DetailTransaksiResponse
+import com.example.diswis.response.Transaksi.ResponseTransaksi
 import com.example.diswis.response.destinasi.Destinasi
 import com.example.diswis.response.kuliner.ResponKuliner
 import com.example.diswis.response.login.LoginResponse
@@ -118,6 +120,25 @@ interface ApiService {
         @Field("deskripsi") deskripsi: String,
         @Field("gambar") gambar: String,
         @Field("id_wisata") idWisata: String
+
     ): Call<PaketRespon>
+    // 4. Transaksi Header (Step 1)
+    @FormUrlEncoded
+    @POST("transaksi") 
+    fun pesan(
+        @Field("email") email: String,
+        @Field("tanggal_pesan") tanggal: String
+    ): Call<ResponseTransaksi>
+
+    // 5. Transaksi Detail (Step 2)
+    @FormUrlEncoded
+    @POST("detail_transaksi")
+    fun postDetailTransaksi(
+        @Field("id_transaksi") idTransaksi: String,
+        @Field("tanggal") tanggal: String,
+        @Field("jumlah_tiket") jumlahTiket: String,
+        @Field("total_harga") totalHarga: String
+    ): Call<DetailTransaksiResponse>
+
 
 }

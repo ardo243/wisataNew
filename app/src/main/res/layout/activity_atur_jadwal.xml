@@ -177,194 +177,190 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <!-- Jumlah Tiket View -->
-                 <LinearLayout
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- Bottom Fixed Area -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <!-- Floating Ticket Counter Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_ticket_counter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginBottom="-24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:layout_constraintBottom_toTopOf="@+id/bottom_sheet_content"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="12dp">
+                    android:padding="16dp">
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ticket"
-                         app:tint="#1E88E5"
-                        tools:ignore="ContentDescription" />
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_person"
+                        app:tint="#1E88E5"
+                        android:background="@drawable/bg_blue_top_rounded"
+                        android:backgroundTint="#E3F2FD"
+                        android:padding="12dp"/>
 
-                    <TextView
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Tiket"
+                            android:textColor="#000000"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jumlah peserta"
+                            android:textColor="#757575"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Jumlah Tiket"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                        android:gravity="center_vertical">
 
-                <androidx.cardview.widget.CardView
+                        <ImageView
+                            android:id="@+id/btn_minus_adult"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/kurang"
+                            app:tint="#1E88E5"
+                            android:background="@drawable/bg_white_rounded_square"
+                            android:backgroundTint="#F5F5F5"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:id="@+id/tv_count_adult"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:textStyle="bold"
+                            android:textSize="18sp"/>
+
+                        <ImageView
+                            android:id="@+id/btn_plus_adult"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/outline_add_24"
+                            app:tint="#1E88E5"
+                            android:background="@drawable/bg_white_rounded_square"
+                            android:backgroundTint="#F5F5F5"
+                            android:padding="8dp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Bottom Sheet Content -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/bottom_sheet_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="16dp"
+                app:cardCornerRadius="32dp"
+                app:cardBackgroundColor="#FFFFFF"
+                android:layout_marginTop="-20dp"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp"
-                    app:cardBackgroundColor="#F5F5F5">
+                    android:orientation="vertical"
+                    android:paddingTop="36dp"
+                    android:paddingHorizontal="24dp"
+                    android:paddingBottom="24dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:padding="16dp">
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_person"
-                            app:tint="#1E88E5"
-                            android:background="@drawable/bg_blue_top_rounded"
-                            android:backgroundTint="#E3F2FD"
-                            android:padding="8dp"/>
+                        android:layout_marginBottom="16dp">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginStart="12dp"
                             android:orientation="vertical">
-
-                            <Button
-                                android:id="@+id/btn_pesan_sekarang"
-                                android:layout_width="match_parent"
-                                android:layout_height="56dp"
-                                android:backgroundTint="#1E88E5"
-                                android:text="Lanjut ke Pembayaran"
-                                android:textAllCaps="false"
-                                android:textSize="16sp"
-                                android:textStyle="bold"
-                                app:cornerRadius="12dp" />
-
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Total Tiket"
-                                android:textColor="#000000"
-                                android:textStyle="bold"
-                                android:textSize="14sp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Jumlah peserta"
+                                android:text="Total Pesanan"
                                 android:textColor="#757575"
                                 android:textSize="12sp"/>
+                            <TextView
+                                android:id="@+id/tv_total_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Rp 4.500.000"
+                                android:textColor="#1E88E5"
+                                android:textStyle="bold"
+                                android:textSize="20sp"/>
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:background="@drawable/bg_white_rounded_square"
-                            android:padding="4dp">
-
-                            <ImageView
-                                android:id="@+id/btn_minus_adult"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:src="@drawable/kurang"
-                                app:tint="@color/black"
-                                android:background="@color/biru"
-                                android:padding="4dp"/>
-
+                            android:gravity="end"
+                            android:orientation="vertical">
                             <TextView
-                                android:id="@+id/tv_count_adult"
-                                android:layout_width="30dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="3"
-                                android:gravity="center"
+                                android:text="Estimasi"
+                                android:textColor="#757575"
+                                android:textSize="12sp"/>
+                            <TextView
+                                android:id="@+id/tv_total_tickets_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3 Tiket"
                                 android:textColor="#000000"
                                 android:textStyle="bold"
-                                android:textSize="16sp"/>
-
-                            <ImageView
-                                android:id="@+id/btn_plus_adult"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:src="@drawable/baseline_add_24"
-                                app:tint="#1E88E5"
-                                android:padding="0dp"/>
+                                android:textSize="14sp"/>
                         </LinearLayout>
-
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
-        </ScrollView>
+                    <Button
+                         android:id="@+id/btn_pesan_sekarang"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:backgroundTint="#1E88E5"
+                        android:text="Lanjut ke Pembayaran"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="16dp" />
 
-        <!-- Bottom Bar -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:cardElevation="16dp"
-            app:cardBackgroundColor="#FFFFFF">
-            
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="24dp">
-                
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="16dp">
-                    
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Total Pesanan"
-                            android:textColor="#757575"
-                            android:textSize="12sp"/>
-                        <TextView
-                            android:id="@+id/tv_total_price"
-                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp 4.500.000"
-                            android:textColor="#1E88E5"
-                            android:textStyle="bold"
-                            android:textSize="18sp"/>
-                    </LinearLayout>
-                    
-                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Estimasi"
-                            android:textColor="#757575"
-                            android:textSize="10sp"/>
-                        <TextView
-                            android:id="@+id/tv_total_tickets_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="3 Tiket"
-                            android:textColor="#000000"
-                            android:textStyle="bold"
-                            android:textSize="14sp"/>
-                    </LinearLayout>
                 </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

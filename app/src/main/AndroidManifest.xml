@@ -46,6 +46,7 @@
         <activity
             android:name=".KulinerActivity"
             android:exported="false" />
+
         <activity
             android:name=".WishlistActivity"
             android:exported="false" />

@@ -41,13 +41,12 @@ class Fragment_PaketWisata: Fragment() {
                         val data = response.body()?.data ?: emptyList()
 
                         recyclerView.adapter = AdapterPaket(data) {
-                            Toast.makeText(
-                                requireContext(),
-                                "Klik: ${it.namaPaket}",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
-                            // NANTI → ke TransaksiPaketActivity
+                            val intent = android.content.Intent(requireContext(), AturJadwalActivity::class.java)
+                            intent.putExtra("EXTRA_TITLE", it.namaPaket)
+                            intent.putExtra("EXTRA_PRICE", it.harga)
+                            val idToSend = it.idPaket ?: it.idWisata
+                            intent.putExtra("EXTRA_ID_WISATA", idToSend)
+                            startActivity(intent)
                         }
                     }
                 }
