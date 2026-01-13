@@ -22,15 +22,15 @@ class ActivityHome : AppCompatActivity() {
     private var carouselItems: List<CarouselItem> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // val sessionManager = SessionManager(this)
+        val sessionManager = SessionManager(this)
 
         // ✅ CEK SESSION DULU (PALING PENTING)
-        // Session Check Removed
-        // if (!sessionManager.isLoggedIn()) {
-        //    startActivity(Intent(this, ActivityLogin::class.java))
-        //    finish()
-        //    return
-        // }
+        // Session Check
+        if (!sessionManager.isLoggedIn()) {
+           startActivity(Intent(this, ActivityLogin::class.java))
+           finish()
+           return
+        }
 
         setContentView(R.layout.activity_home)
 
@@ -49,7 +49,8 @@ class ActivityHome : AppCompatActivity() {
 
         // ===== TAMPILKAN DATA USER =====
         val tvUsername = findViewById<TextView>(R.id.tv_username)
-        tvUsername.text = "Pengunjung" // sessionManager.getEmail() ?: "User"
+        val username = sessionManager.getUsername()
+        tvUsername.text = username ?: "Pengunjung"
 
         // ===== MENU NAVIGASI =====
         findViewById<LinearLayout>(R.id.btn_destinasi).setOnClickListener {
@@ -82,7 +83,12 @@ class ActivityHome : AppCompatActivity() {
         // If Logic for bottom nav exists elsewhere or is just icons, it is fine.
         // Logic for profile icon in bottom nav:
         findViewById<android.widget.ImageView>(R.id.nav_profile).setOnClickListener {
-             // startActivity(Intent(this, ProfileActivity::class.java)) 
+             startActivity(Intent(this, ProfileActivity::class.java)) 
+        }
+
+        // Ticket Navigation
+        findViewById<android.widget.ImageView>(R.id.nav_user).setOnClickListener {
+             startActivity(Intent(this, TicketActivity::class.java)) 
         }
 
         // Wishlist Navigation
@@ -117,12 +123,8 @@ class ActivityHome : AppCompatActivity() {
                 R.drawable.jogja,
                 "Malioboro",
                 "Jantung kota Yogyakarta yang tak pernah tidur"
-            ),
-            CarouselItem(
-                R.drawable.ibarbo,
-                "Ibarbo Park",
-                "Destinasi wisata keluarga dengan berbagai wahana seru"
             )
+
         )
 
         val adapter = CarouselAdapter(carouselItems)

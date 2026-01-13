@@ -12,6 +12,9 @@ data class Data(
     @SerializedName("logged_in")
     val loggedIn: Boolean,
 
+    @SerializedName("no_telpon")
+    val noTelpon: String?,
+
     @SerializedName("username")
     val username: String
 )

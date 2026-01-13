@@ -28,7 +28,7 @@ interface ApiService {
     fun register(
         @Field("username") username: String,
         @Field("email") email: String,
-        @Field("no_telpon") noTelpon: String,
+        @Field("no_telpon") notelpon: String,
         @Field("password") password: String
     ): Call<RegisterResponse>
 
@@ -135,10 +135,16 @@ interface ApiService {
     @POST("detail_transaksi")
     fun postDetailTransaksi(
         @Field("id_transaksi") idTransaksi: String,
+        @Field("id_wisata") idWisata: String,
         @Field("tanggal") tanggal: String,
         @Field("jumlah_tiket") jumlahTiket: String,
         @Field("total_harga") totalHarga: String
     ): Call<DetailTransaksiResponse>
 
 
+    // 6. Get Riwayat Transaksi
+    @GET("riwayat")
+    fun getRiwayat(
+        @Query("email") email: String
+    ): Call<com.example.diswis.response.riwayat_transaksi.RiwayatTransaksiResponse>
 }

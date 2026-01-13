@@ -16,6 +16,10 @@
         android:theme="@style/Theme.Diswis"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Diswis" />
+        <activity
             android:name=".Activity_detai_kuliner"
             android:exported="false"
             android:theme="@style/Theme.Diswis" />
@@ -47,6 +51,9 @@
             android:name=".KulinerActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".TicketActivity"
+            android:exported="false" />
         <activity
             android:name=".WishlistActivity"
             android:exported="false" />

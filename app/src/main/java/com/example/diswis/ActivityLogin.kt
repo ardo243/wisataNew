@@ -68,7 +68,8 @@ class ActivityLogin : AppCompatActivity() {
                         ) {
                             sessionManager.createLoginSession(
                                 email = loginResponse.data.email,
-                                username = loginResponse.data.username
+                                username = loginResponse.data.username,
+                                noTelpon = loginResponse.data.noTelpon
                             )
 
                             Toast.makeText(

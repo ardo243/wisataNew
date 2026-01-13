@@ -130,8 +130,11 @@ class PembayaranActivity : AppCompatActivity() {
     
    
     private fun postDetail(idTransaksi: String) {
+        val idWisata = intent.getStringExtra("EXTRA_ID_WISATA") ?: "0"
+
         ApiClient.instance.postDetailTransaksi(
             idTransaksi = idTransaksi,
+            idWisata = idWisata,
             tanggal = selectedDate,
             jumlahTiket = ticketCount.toString(),
             totalHarga = totalAmount.toString()

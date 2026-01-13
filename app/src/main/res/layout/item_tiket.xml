@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Nama Wisata -->
+        <TextView
+            android:id="@+id/tv_nama_wisata_tiket"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Candi Prambanan"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:fontFamily="@font/poppins_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_total_harga_tiket"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Tanggal -->
+        <TextView
+            android:id="@+id/tv_tanggal_wisata_tiket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12 Jan 2024"
+            android:textSize="12sp"
+            android:textColor="#9E9E9E"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nama_wisata_tiket"/>
+
+        <!-- Harga (Right Side) -->
+        <TextView
+            android:id="@+id/tv_total_harga_tiket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp 150.000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#03A9F4"
+            android:fontFamily="@font/poppins_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_tanggal_wisata_tiket"
+            app:layout_constraintTop_toTopOf="@+id/tv_nama_wisata_tiket"/>
+
+        <!-- Badges Container -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tanggal_wisata_tiket">
+
+            <!-- Jumlah Tiket Badge -->
+            <TextView
+                android:id="@+id/tv_jumlah_tiket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 Tiket"
+                android:textSize="12sp"
+                android:textColor="#616161"
+                android:fontFamily="@font/poppins_medium"
+                android:background="@drawable/bg_white_rounded_square"
+                android:backgroundTint="#F5F5F5"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"/>
+
+            <!-- Status Badge -->
+            <TextView
+                android:id="@+id/tv_status_tiket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Berhasil"
+                android:textSize="12sp"
+                android:textColor="#4CAF50"
+                android:fontFamily="@font/poppins_medium"
+                android:background="@drawable/bg_white_rounded_square"
+                android:backgroundTint="#E8F5E9"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:layout_marginStart="8dp"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

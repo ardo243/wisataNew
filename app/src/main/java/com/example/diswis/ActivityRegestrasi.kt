@@ -38,7 +38,7 @@ class ActivityRegestrasi : AppCompatActivity() {
                 username = username,
                 email = email,
                 password = password,
-                noTelpon = phone
+                notelpon = phone
             ).enqueue(object : Callback<RegisterResponse> {
 
                 override fun onResponse(

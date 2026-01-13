@@ -14,9 +14,17 @@ object ApiClient {
             .setLenient()
             .create()
 
+        val logging = okhttp3.logging.HttpLoggingInterceptor()
+        logging.setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY)
+
+        val client = okhttp3.OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .build()
+
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(client)
             .build()
 
         retrofit.create(ApiService::class.java)

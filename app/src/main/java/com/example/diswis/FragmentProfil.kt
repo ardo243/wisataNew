@@ -36,10 +36,51 @@ class FragmentProfil : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profil, container, false)
         
-        // Wishlist Navigation
+        // Initialize SessionManager
+        val sessionManager = SessionManager(requireContext())
+        
+        // Find Views
+        val tvName = view.findViewById<android.widget.TextView>(R.id.tv_name)
+        val etUsername = view.findViewById<android.widget.EditText>(R.id.et_username)
+        val etPhone = view.findViewById<android.widget.EditText>(R.id.et_phone)
+        val etEmail = view.findViewById<android.widget.EditText>(R.id.et_email)
+        
+        // Populate Data
+        val username = sessionManager.getUsername()
+        val email = sessionManager.getEmail()
+        val phone = sessionManager.getPhone()
+        
+        // DEBUG TOAST
+        // android.widget.Toast.makeText(context, "Session Phone: $phone", android.widget.Toast.LENGTH_SHORT).show()
+        
+        tvName.text = username ?: "Pengunjung"
+        etUsername.setText(username)
+        etEmail.setText(email)
+        etPhone.setText(phone ?: "-")
+        
+        // BOTTOM NAVIGATION LOGIC
+        // 1. Home
+        val navHome = view.findViewById<android.widget.ImageView>(R.id.nav_home)
+        navHome.setOnClickListener {
+            startActivity(android.content.Intent(context, ActivityHome::class.java))
+        }
+
+        // 2. Ticket (Paket Wisata -> TicketActivity)
+        val navTicket = view.findViewById<android.widget.ImageView>(R.id.nav_paket)
+        navTicket.setOnClickListener {
+             startActivity(android.content.Intent(context, TicketActivity::class.java))
+        }
+
+        // 3. Wishlist (Love)
         val navFav = view.findViewById<android.widget.ImageView>(R.id.nav_fav)
         navFav.setOnClickListener {
             startActivity(android.content.Intent(context, WishlistActivity::class.java))
+        }
+
+        // 4. Profile (Settings/Person) - Already Here (Optional: Refresh)
+        val navProfile = view.findViewById<android.view.View>(R.id.nav_profile_active)
+        navProfile.setOnClickListener {
+            // Already here
         }
 
         return view
