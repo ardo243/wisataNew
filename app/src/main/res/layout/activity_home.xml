@@ -80,7 +80,7 @@
                     android:padding="8dp"
                     android:background="@drawable/bg_white_rounded_square"
                     android:backgroundTint="#33FFFFFF"
-                    android:src="@drawable/ticket"
+                    android:src="@drawable/notip"
                     app:tint="@color/white" />
             </LinearLayout>
 

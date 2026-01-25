@@ -6,9 +6,9 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp"
+    app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="24dp"
-    app:cardElevation="4dp"
-    app:cardBackgroundColor="@android:color/white">
+    app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -79,19 +79,20 @@
             app:layout_constraintStart_toStartOf="@+id/tv_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
-        <!-- Tags Container -->
-        <HorizontalScrollView
-            android:id="@+id/scroll_tags"
+        <!-- Tags Container using ChipGroup for multi-line wrapping -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/layout_tags"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:scrollbars="none"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_description">
+            app:chipSpacingVertical="4dp"
+            app:chipSpacingHorizontal="8dp"
+            app:singleLine="false"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_descriptionpaketwis" />
 
-        </HorizontalScrollView>
-
+        <!-- Price Section -->
         <TextView
             android:id="@+id/tv_pricepaket"
             android:layout_width="wrap_content"
@@ -118,33 +119,18 @@
 
         <Button
             android:id="@+id/btn_pesan"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="332dp"
-            android:layout_marginEnd="32dp"
-            android:backgroundTint="#039BE5"
-            android:text="Pesan"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            app:cornerRadius="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scroll_tags" />
-
-        <LinearLayout
-            android:id="@+id/layout_tags"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_pricepaket"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_descriptionpaketwis">
-            
-            <!-- Tags will be added dynamically via Adapter -->
-
-        </LinearLayout>
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#039BE5"
+            android:paddingHorizontal="32dp"
+            android:text="Pesan"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/layout_tags" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

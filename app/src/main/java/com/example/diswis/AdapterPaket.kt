@@ -43,7 +43,7 @@ class AdapterPaket(
              .into(holder.itemView.findViewById<android.widget.ImageView>(R.id.img_package))
              
         // Dynamic Facilities Tags
-        val layoutTags = holder.itemView.findViewById<android.widget.LinearLayout>(R.id.layout_tags)
+        val layoutTags = holder.itemView.findViewById<android.view.ViewGroup>(R.id.layout_tags)
         layoutTags.removeAllViews() // Clear existing tags (from recycling)
 
         if (!item.fasilitas.isNullOrEmpty()) {
@@ -56,9 +56,9 @@ class AdapterPaket(
                     textView.textSize = 10f
                     textView.setTypeface(null, android.graphics.Typeface.BOLD)
                     
-                    val params = android.widget.LinearLayout.LayoutParams(
-                        android.widget.LinearLayout.LayoutParams.WRAP_CONTENT,
-                        android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+                    val params = android.view.ViewGroup.MarginLayoutParams(
+                        android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+                        android.view.ViewGroup.LayoutParams.WRAP_CONTENT
                     )
                     params.marginEnd = 8.dpToPx(holder.itemView.context)
                     textView.layoutParams = params

@@ -7,7 +7,7 @@ data class Data(
     val email: String,
 
     @SerializedName("id_user")
-    val idUser: String, // Menggunakan camelCase agar sesuai standar Kotlin
+    val idUser: Int, // Menggunakan camelCase agar sesuai standar Kotlin
 
     @SerializedName("logged_in")
     val loggedIn: Boolean,

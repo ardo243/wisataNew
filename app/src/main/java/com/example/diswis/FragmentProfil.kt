@@ -45,15 +45,19 @@ class FragmentProfil : Fragment() {
         val etPhone = view.findViewById<android.widget.EditText>(R.id.et_phone)
         val etEmail = view.findViewById<android.widget.EditText>(R.id.et_email)
         
+        // Header Back Button
+        val btnBack = view.findViewById<android.view.View>(R.id.btn_back)
+        btnBack.setOnClickListener {
+            // Optional: Go back or Home
+             startActivity(android.content.Intent(context, ActivityHome::class.java))
+        }
+
         // Populate Data
         val username = sessionManager.getUsername()
         val email = sessionManager.getEmail()
         val phone = sessionManager.getPhone()
         
-        // DEBUG TOAST
-        // android.widget.Toast.makeText(context, "Session Phone: $phone", android.widget.Toast.LENGTH_SHORT).show()
-        
-        tvName.text = username ?: "Pengunjung"
+        tvName.text = username ?: "Raditya"
         etUsername.setText(username)
         etEmail.setText(email)
         etPhone.setText(phone ?: "-")
@@ -77,7 +81,7 @@ class FragmentProfil : Fragment() {
             startActivity(android.content.Intent(context, WishlistActivity::class.java))
         }
 
-        // 4. Profile (Settings/Person) - Already Here (Optional: Refresh)
+        // 4. Profile (Settings/Person) - Already Here
         val navProfile = view.findViewById<android.view.View>(R.id.nav_profile_active)
         navProfile.setOnClickListener {
             // Already here

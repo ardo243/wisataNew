@@ -4,283 +4,267 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/biru"
+    android:background="@color/white"
     tools:context=".FragmentProfil">
+
+    <!-- Header -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_white_rounded_square"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="#000000"
+            android:padding="12dp"
+            android:elevation="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profil"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_layout"
         app:layout_constraintBottom_toTopOf="@+id/bottomNav">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="32dp">
+            android:orientation="vertical"
+            android:paddingBottom="40dp"
+            android:gravity="center_horizontal">
 
-            <!-- Profile Image Section -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_profile_image"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="40dp"
-                app:cardCornerRadius="60dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <!-- Profile Image -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_profile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="50dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#D1E8FF"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/person"
+                        app:tint="#4285F4" />
+                </androidx.cardview.widget.CardView>
 
                 <ImageView
-                    android:id="@+id/iv_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/person"
-                    android:scaleType="centerCrop"
-                    android:background="#D1E8FF"
-                    android:padding="20dp"
-                    app:tint="#4285F4"/>
-            </androidx.cardview.widget.CardView>
+                    android:id="@+id/btn_edit_photo"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/outline_edit_24"
+                    android:background="@drawable/bg_circle_blue"
+                    android:padding="6dp"
+                    android:elevation="4dp"
+                    app:tint="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="@id/cv_profile"
+                    app:layout_constraintEnd_toEndOf="@id/cv_profile"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Edit Icon -->
-            <ImageView
-                android:id="@+id/btn_edit_profile"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_edit"
-                android:background="@drawable/bg_white_rounded_square"
-                android:backgroundTint="#1A237E"
-                android:padding="8dp"
-                android:elevation="4dp"
-                app:layout_constraintBottom_toBottomOf="@+id/cv_profile_image"
-                app:layout_constraintEnd_toEndOf="@+id/cv_profile_image"
-                app:layout_constraintHorizontal_bias="0.9"
-                app:layout_constraintVertical_bias="0.9"
-                app:tint="@android:color/white"/>
-
-            <!-- Name -->
+            <!-- Name & Subtitle -->
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="raditya "
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold"
+                android:text="Raditya"
                 android:fontFamily="@font/poppins_bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cv_profile_image" />
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_marginTop="16dp"/>
 
-            <!-- Form Fields -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Travel Enthusiast"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="14sp"
+                android:textColor="#808080"
+                android:layout_marginTop="4dp"/>
+
+            <!-- Form -->
             <LinearLayout
-                android:id="@+id/layout_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingStart="24dp"
-                android:paddingEnd="24dp"
-                android:layout_marginTop="24dp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name">
+                android:paddingHorizontal="24dp"
+                android:layout_marginTop="32dp">
 
                 <!-- Username -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="USERNAME"
+                    android:fontFamily="@font/poppins_bold"
                     android:textSize="12sp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="#B0B0B0"
                     android:layout_marginBottom="8dp"/>
 
                 <EditText
                     android:id="@+id/et_username"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="56dp"
                     android:background="@drawable/bg_white_rounded_square"
-                    android:paddingStart="16dp"
+                    android:drawableStart="@drawable/ic_person"
+                    android:drawablePadding="16dp"
+                    android:paddingHorizontal="16dp"
                     android:text="radit"
-                    android:textSize="14sp"
                     android:textColor="#000000"
-                    android:enabled="false"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_marginBottom="16dp"/>
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:layout_marginBottom="20dp"
+                    android:drawableTint="#808080"/>
 
-                <!-- Phone -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="NO. TELEPON"
+                    android:fontFamily="@font/poppins_bold"
                     android:textSize="12sp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="#B0B0B0"
                     android:layout_marginBottom="8dp"/>
 
                 <EditText
                     android:id="@+id/et_phone"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="56dp"
                     android:background="@drawable/bg_white_rounded_square"
-                    android:paddingStart="16dp"
+                    android:drawableStart="@drawable/ic_phone"
+                    android:drawablePadding="16dp"
+                    android:paddingHorizontal="16dp"
                     android:text="081234567890"
-                    android:textSize="14sp"
                     android:textColor="#000000"
-                    android:enabled="false"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_marginBottom="16dp"/>
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:layout_marginBottom="20dp"
+                    android:drawableTint="#808080"/>
 
                 <!-- Email -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="EMAIL"
+                    android:fontFamily="@font/poppins_bold"
                     android:textSize="12sp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="#B0B0B0"
                     android:layout_marginBottom="8dp"/>
 
                 <EditText
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="56dp"
                     android:background="@drawable/bg_white_rounded_square"
-                    android:paddingStart="16dp"
-                    android:text="stevi.ema@email.com"
-                    android:textSize="14sp"
+                    android:drawableStart="@drawable/ic_email"
+                    android:drawablePadding="16dp"
+                    android:paddingHorizontal="16dp"
+                    android:text="radit@email.com"
                     android:textColor="#000000"
-                    android:enabled="false"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_marginBottom="24dp"/>
-
-                <!-- Simpan Button -->
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_simpan"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Simpan"
-                    android:textColor="@android:color/white"
-                    android:textAllCaps="false"
-                    android:background="@drawable/bg_button_blue"
+                    android:textSize="14sp"
                     android:fontFamily="@font/poppins_medium"
-                    android:textSize="14sp"/>
+                    android:layout_marginBottom="32dp"
+                    android:drawableTint="#808080"/>
+
+
 
             </LinearLayout>
 
-            <!-- Developer Section -->
-            <TextView
-                android:id="@+id/tv_dev_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TENTANG PENGEMBANG"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:letterSpacing="0.1"
-                android:fontFamily="@font/poppins_bold"
-                android:layout_marginTop="32dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_form"/>
-
-            <LinearLayout
+            <!-- Developer Info -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginTop="16dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_dev_title">
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="32dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
 
-                <!-- Hubungi Kami -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:padding="20dp"
+                    android:background="@android:color/white">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="24dp"
-                            android:src="@drawable/ic_phone"
-                            app:tint="#1A237E"/>
-                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/tv_dev_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tentang Pengembang"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="14sp"
+                        android:textColor="#000000"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hubungi Kami"
-                        android:textSize="10sp"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/poppins_regular"/>
-                </LinearLayout>
+                        android:text="Versi Aplikasi 2.4.0"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="12sp"
+                        android:textColor="#808080"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_dev_label"/>
 
-                <!-- Website -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="24dp"
-                            android:src="@drawable/ic_website"
-                            app:tint="#1A237E"/>
-                    </androidx.cardview.widget.CardView>
-                    <TextView
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Website"
-                        android:textSize="10sp"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/poppins_regular"/>
-                </LinearLayout>
+                        android:src="@drawable/ic_chevron_right"
+                        app:tint="#808080"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
 
-                <!-- Lokasi Kami -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="24dp"
-                            android:src="@drawable/location"
-                            app:tint="#1A237E"/>
-                    </androidx.cardview.widget.CardView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Lokasi Kami"
-                        android:textSize="10sp"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/poppins_regular"/>
-                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
+            <!-- Logout Button -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:text="Keluar"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_button_blue"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
@@ -310,14 +294,14 @@
             android:layout_height="24dp"
             android:layout_weight="1"
             android:src="@drawable/ticket"
-            app:tint="#9E9E9E"/>
+             app:tint="#9E9E9E"/>
 
         <ImageView
             android:id="@+id/nav_fav"
-            android:layout_width="0dp"
+             android:layout_width="0dp"
             android:layout_height="24dp"
             android:layout_weight="1"
-            android:src="@drawable/love"
+             android:src="@drawable/love"
             app:tint="#9E9E9E"/>
 
         <LinearLayout
@@ -339,7 +323,7 @@
                 android:text="Profil"
                 android:textSize="10sp"
                 android:textColor="#1A237E"
-                android:fontFamily="@font/poppins_medium"/>
+                 android:fontFamily="@font/poppins_medium"/>
         </LinearLayout>
     </LinearLayout>
 

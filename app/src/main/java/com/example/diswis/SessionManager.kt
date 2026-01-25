@@ -12,13 +12,15 @@ class SessionManager(context: Context) {
         const val KEY_EMAIL = "email"
         const val KEY_PHONE = "no_telpon"
         const val KEY_USERNAME = "username"
+        const val KEY_ID_USER = "id_user"
     }
 
-    fun createLoginSession(email: String, username: String, noTelpon: String?) {
+    fun createLoginSession(email: String, username: String, noTelpon: String?, idUser: Int) {
         editor.putBoolean(KEY_IS_LOGGED_IN, true)
         editor.putString(KEY_EMAIL, email)
         editor.putString(KEY_USERNAME, username)
         editor.putString(KEY_PHONE, noTelpon)
+        editor.putInt(KEY_ID_USER, idUser)
         editor.apply()
     }
 
@@ -33,9 +35,13 @@ class SessionManager(context: Context) {
     fun getUsername(): String? {
         return prefs.getString(KEY_USERNAME, null)
     }
-    
+
     fun getPhone(): String? {
         return prefs.getString(KEY_PHONE, null)
+    }
+
+    fun getIdUser(): Int {
+        return prefs.getInt(KEY_ID_USER, -1) // Default -1 if not found
     }
 
     fun logout() {
