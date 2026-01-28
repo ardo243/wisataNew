@@ -13,14 +13,12 @@ class AdapterPaket(
     private val list: List<Data>,
     private val onClick: (Data) -> Unit
 ) : RecyclerView.Adapter<AdapterPaket.ViewHolder>() {
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nama: TextView = view.findViewById(R.id.tv_title)
         val durasi: TextView = view.findViewById(R.id.tv_durationpaket)
         val harga: TextView = view.findViewById(R.id.tv_pricepaket)
-        val deskripsi: TextView = view.findViewById(R.id.tv_descriptionpaketwis) // Add this
+        val deskripsi: TextView = view.findViewById(R.id.tv_descriptionpaketwis)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_paket_wisata, parent, false)
@@ -32,17 +30,13 @@ class AdapterPaket(
         holder.nama.text = item.namaPaket
         holder.durasi.text = "Durasi: ${item.durasi}"
         holder.harga.text = "Rp ${item.harga}"
-        holder.deskripsi.text = item.deskripsi // Bind description
-        
-        // Bind Image
+        holder.deskripsi.text = item.deskripsi
         val imgBaseUrl = "http://10.0.2.2/api_wisata/gambar/"
         com.squareup.picasso.Picasso.get()
              .load(imgBaseUrl + item.gambar)
              .placeholder(R.drawable.candi_prambanan)
              .error(android.R.color.darker_gray)
              .into(holder.itemView.findViewById<android.widget.ImageView>(R.id.img_package))
-             
-        // Dynamic Facilities Tags
         val layoutTags = holder.itemView.findViewById<android.view.ViewGroup>(R.id.layout_tags)
         layoutTags.removeAllViews() // Clear existing tags (from recycling)
 
@@ -65,12 +59,9 @@ class AdapterPaket(
                     
                     textView.setBackgroundResource(R.drawable.bg_white_rounded_square)
                     textView.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#F5F5F5"))
-                    
-                    // Padding
                     val paddingHorizontal = 12.dpToPx(holder.itemView.context)
                     val paddingVertical = 6.dpToPx(holder.itemView.context)
                     textView.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
-                    
                     layoutTags.addView(textView)
                 }
             }

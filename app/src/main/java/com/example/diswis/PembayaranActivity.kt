@@ -15,7 +15,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.diswis.api.ApiClient
-import com.example.diswis.response.Detail_Transaksi.DetailTransaksiResponse
 import com.example.diswis.response.Transaksi.ResponseTransaksi
 import retrofit2.Call
 import retrofit2.Callback
@@ -101,18 +100,23 @@ class PembayaranActivity : AppCompatActivity() {
             return
         }
 
-        // 1. Post Transaction Header (Email + Tanggal)
-        ApiClient.instance.pesan(email, selectedDate).enqueue(object : Callback<ResponseTransaksi> {
+        // 1. Post Transaction Header (Email + Tanggal + Harga)
+        ApiClient.instance.pesan(
+            email, 
+            ticketCount.toString(),
+            totalAmount.toString()
+        ).enqueue(object : Callback<ResponseTransaksi> {
             override fun onResponse(call: Call<ResponseTransaksi>, response: Response<ResponseTransaksi>) {
                 if (response.isSuccessful) {
                     val status = response.body()?.status
                     if (status == true) {
                         val idDetail = response.body()?.data?.id_detail
-                        if (idDetail != null && idDetail != 0) {
-                             // 2. Post Transaction Details with ID
-                            postDetail(idDetail.toString())
+                        if (idDetail != null) {
+                             // SUCCESS: Directly navigate to Home
+                             Toast.makeText(this@PembayaranActivity, "Pembayaran Berhasil Disimpan!", Toast.LENGTH_LONG).show()
+                             navigateToHome()
                         } else {
-                             Toast.makeText(this@PembayaranActivity, "ERROR API 1: id_transaksi kosong. Cek Response PHP.", Toast.LENGTH_LONG).show()
+                             Toast.makeText(this@PembayaranActivity, "ERROR API 1: id_transaksi kosong.", Toast.LENGTH_LONG).show()
                         }
                     } else {
                         Toast.makeText(this@PembayaranActivity, "ERROR API 1: Status False. Msg: ${response.body()?.message}", Toast.LENGTH_LONG).show()
@@ -129,38 +133,7 @@ class PembayaranActivity : AppCompatActivity() {
     }
     
    
-    private fun postDetail(idTransaksi: String) {
-        val idWisata = intent.getStringExtra("EXTRA_ID_WISATA") ?: "0"
 
-        ApiClient.instance.postDetailTransaksi(
-            idTransaksi = idTransaksi,
-            idWisata = idWisata,
-            tanggal = selectedDate,
-            jumlahTiket = ticketCount.toString(),
-            totalHarga = totalAmount.toString()
-        ).enqueue(object : Callback<DetailTransaksiResponse> {
-            override fun onResponse(
-                call: Call<DetailTransaksiResponse>,
-                response: Response<DetailTransaksiResponse>
-            ) {
-                 if (response.isSuccessful) {
-                     val body = response.body()
-                     if (body?.status == true) {
-                        Toast.makeText(this@PembayaranActivity, "Pembayaran Berhasil Disimpan!", Toast.LENGTH_LONG).show()
-                        navigateToHome()
-                     } else {
-                         Toast.makeText(this@PembayaranActivity, "ERROR API 2: Status False. Msg: ${body?.message}", Toast.LENGTH_LONG).show()
-                     }
-                } else {
-                     Toast.makeText(this@PembayaranActivity, "ERROR API 2 Gagal: Code ${response.code()}", Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onFailure(call: Call<DetailTransaksiResponse>, t: Throwable) {
-                 Toast.makeText(this@PembayaranActivity, "ERROR KONEKSI API 2: ${t.message}", Toast.LENGTH_LONG).show()
-            }
-        })
-    }
 
     private fun navigateToHome() {
         val intent = Intent(this, ActivityHome::class.java)

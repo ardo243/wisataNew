@@ -93,12 +93,13 @@ class AturJadwalActivity : AppCompatActivity() {
                 (value * 1_000_000).toInt()
             } else if (cleanPrice.contains("k")) {
                  cleanPrice = cleanPrice.replace("k", "")
-                 // If there's a dot or comma in "80.5k" or similar? Assuming simple cases for now or standard format
-                 cleanPrice = cleanPrice.replace(".", "") // remove thousands separator points if any, BUT care if it is decimal
-                 // Actually standard "80k" is 80000. "1.5jt" is 1500000.
-                 val value = cleanPrice.toIntOrNull() ?: 0
-                 value * 1000
+                 val value = cleanPrice.toDoubleOrNull() ?: 0.0 // Changed to toDoubleOrNull to handle "1.5k"
+                 (value * 1000).toInt()
             } else {
+                 // Check if it ends with .00 (database format like 15000.00)
+                 if (cleanPrice.endsWith(".00")) {
+                     cleanPrice = cleanPrice.substring(0, cleanPrice.length - 3)
+                 }
                  // Standard number parsing
                  cleanPrice = cleanPrice.replace(".", "") // Remove points used as thousands separators in ID format
                  cleanPrice.toInt()

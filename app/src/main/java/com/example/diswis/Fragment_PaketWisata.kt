@@ -23,7 +23,6 @@ class Fragment_PaketWisata: Fragment() {
     ): View {
         return inflater.inflate(R.layout.fragment_paket_wisata, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -39,7 +38,6 @@ class Fragment_PaketWisata: Fragment() {
                 ) {
                     if (response.isSuccessful) {
                         val data = response.body()?.data ?: emptyList()
-
                         recyclerView.adapter = AdapterPaket(data) {
                             val intent = android.content.Intent(requireContext(), AturJadwalActivity::class.java)
                             intent.putExtra("EXTRA_TITLE", it.namaPaket)

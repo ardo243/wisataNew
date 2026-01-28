@@ -1,10 +1,9 @@
 package com.example.diswis.api
 
-import com.example.diswis.response.destinasi.DetailDestinasiResponse
 import com.example.diswis.DetailDestinasiActivity
-import com.example.diswis.response.Detail_Transaksi.DetailTransaksiResponse
 import com.example.diswis.response.Transaksi.ResponseTransaksi
 import com.example.diswis.response.destinasi.Destinasi
+import com.example.diswis.response.destinasi.DetailDestinasiResponse
 import com.example.diswis.response.kuliner.ResponKuliner
 import com.example.diswis.response.login.LoginResponse
 import com.example.diswis.response.paket.PaketRespon
@@ -31,16 +30,12 @@ interface ApiService {
         @Field("no_telpon") notelpon: String,
         @Field("password") password: String
     ): Call<RegisterResponse>
-
     @GET("destinasi")
     fun getDestinasi(): Call<Destinasi>
-
     @GET("destinasi/detail/{id}")
     fun getDetailDestinasi(
         @Path("id") id: String
     ): Call<DetailDestinasiResponse>
-
-    // CREATE
     @FormUrlEncoded
     @POST("destinasi")
     fun addDestinasi(
@@ -51,8 +46,6 @@ interface ApiService {
         @Field("jam_op") jamOperasional: String,
         @Field("gambar") gambar: String
     ): Call<Map<String, Any>>
-
-    // UPDATE
     @FormUrlEncoded
     @PUT("destinasi/{id}")
     fun updateDestinasi(
@@ -100,16 +93,10 @@ interface ApiService {
         @Field("deskripsi") deskripsi: String,
         @Field("lokasi") lokasi: String,
         @Field("jam_op") jamOp: String,
-        @Field("gambar") gambar: String // Biasanya berupa String URL atau Base64
+        @Field("gambar") gambar: String
     ): Call<Map<String, Any>>
-//paket wisata
-
-    // 1. Mengambil semua daftar paket
     @GET("paket")
     fun getPaket(): Call<PaketRespon>
-
-
-    // 3. Menambah/Kirim data paket baru (Contoh POST)
     @FormUrlEncoded
     @POST("paket")
     fun kirimPaket(
@@ -120,17 +107,14 @@ interface ApiService {
         @Field("deskripsi") deskripsi: String,
         @Field("gambar") gambar: String,
         @Field("id_wisata") idWisata: String
-
     ): Call<PaketRespon>
-    // 4. Transaksi Header (Step 1)
     @FormUrlEncoded
     @POST("transaksi") 
     fun pesan(
         @Field("email") email: String,
-        @Field("tanggal_pesan") tanggal: String
+        @Field("jumlah_tic") jumlahTiket: String,
+        @Field("harga") harga: String
     ): Call<ResponseTransaksi>
-
-    // 5. Transaksi Detail (Step 2)
     @FormUrlEncoded
     @POST("detail_transaksi")
     fun postDetailTransaksi(
@@ -139,10 +123,7 @@ interface ApiService {
         @Field("tanggal") tanggal: String,
         @Field("jumlah_tiket") jumlahTiket: String,
         @Field("total_harga") totalHarga: String
-    ): Call<DetailTransaksiResponse>
-
-
-    // 6. Get Riwayat Transaksi
+    ): Call<Map<String, Any>>
     @GET("riwayat")
     fun getRiwayat(
         @Query("email") email: String
